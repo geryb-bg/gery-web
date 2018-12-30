@@ -23,17 +23,17 @@ export default {
 <style scoped>
 .content {
   text-align: left;
-  max-width: 600px;
+  max-width: 900px;
   margin: auto;
 }
 .home .header-img {
   width: 100%;
 }
 .me-img {
-  width: 6em;
+  width: 8em;
   min-width: 50px;
   border-radius: 50%;
-  margin-left: 1em;
-  margin-top: -3.5em;
+  margin-left: 2em;
+  margin-top: -4.65em;
 }
 </style>

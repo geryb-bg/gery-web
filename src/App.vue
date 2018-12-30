@@ -12,11 +12,12 @@
 
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #0c0032;
   text-align: center;
+  font-size: 1.5em;
 }
 #nav {
   padding: 0.2em;
@@ -32,6 +33,7 @@
   display: inline-block;
   background-color: #190061;
   border: 1px solid #190061;
+  text-decoration: none;
 }
 
 #nav a.router-link-exact-active {
@@ -41,11 +43,11 @@
 
 a {
   color: #240090;
-  text-decoration: none;
 }
 
 h1 {
   color: #3500d3;
+  font-size: 2.5em;
 }
 
 #app {
@@ -54,13 +56,16 @@ h1 {
 
 .page {
   min-height: 100%;
-  margin-bottom: -31.5px;
+  margin-bottom: -40.5px;
 }
 .page:after {
   content: "";
   display: block;
 }
 #nav, .page:after {
-  height: 25px; 
+  height: 31.5px; 
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Changa', sans-serif;
 }
 </style>

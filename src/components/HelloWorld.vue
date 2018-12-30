@@ -79,6 +79,6 @@ h1, h2, h3, p {
   padding-bottom: 15px;
 }
 .last {
-  padding-bottom: 20px;
+  padding-bottom: 30px;
 }
 </style>
