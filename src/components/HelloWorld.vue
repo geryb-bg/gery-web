@@ -2,31 +2,40 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
+      but I usually go by Gery because that's a bit easier to pronounce. I am a South African software developer, adventurer and Star Wars geek extraordinaire.
     </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
+    <h2>I work in the R&D team at <a href="https://www.bbd.co.za/" target="_blank">BBD</a>.</h2>
+    <p>
+      We do a variety of things such as training, consulting and research. My personal areas of interest are web and IoT, and more specifically the convergence of these two technologies. You can check out some of my personal projects on <a href="https://github.com/geryb-bg" target="_blank">GitHub</a>.
+    </p>
+    <h3>I love speaking in community, below you can see some of my more recent talks:</h3>
+    <ul class="talks">
+      <li>
+        <a href="https://www.youtube.com/watch?v=A5s0HiKQb4M" target="_blank">The "I" in IoT</a>
+        <h4>DevFest South Africa</h4>
+        <p>1 December 2018</p>
+      </li>
+      <li>
+        <a href="" target="_blank">Automate your life with Azure</a>
+        <h4>JoziJS</h4>
+        <p>22 November 2018</p>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=VofwRvURf6s" target="_blank">The Physical Web and Beyond</a>
+        <h4>DevConf Johannesburg</h4>
+        <p>27 March 2018</p>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=6B1peJkqEGQ" target="_blank">A Web of Things</a>
+        <h4>JoziJS</h4>
+        <p>18 January 2018</p>
+      </li>
     </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <p>For a full list of talks you can take a look at <a href="https://www.youtube.com/watch?v=jDt559_PeWI&list=PLzkFC7qpj2Jnqc1coWb3Jgp6QwP4gbocC" target="_blank">this YouTube playlist</a>.</p>
+    <h3>I am also trying out this blogging thing.</h3>
+    <p class="last">
+      I haven't gotten very far with it, but you can check out my first article on <a href="https://medium.com/@gerybbg" target="_blank">Medium</a>.
+    </p>
   </div>
 </template>
 
@@ -42,7 +51,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
-  margin: 40px 0 0;
+  margin: 25px 0 0;
 }
 ul {
   list-style-type: none;
@@ -50,9 +59,26 @@ ul {
 }
 li {
   display: inline-block;
-  margin: 0 10px;
+  margin: 0 0.8em;
+  padding: 1em;
+  margin-bottom: 0.5em;
+  width: 15em;
+  box-shadow: 1px 1px 1px #282828;
 }
-a {
-  color: #42b983;
+.talks li a {
+  font-weight: bold;
+}
+.talks li h4 {
+  margin: 0;
+}
+.talks li p {
+  margin: 0;
+  font-size: 0.7em;
+}
+h1, h2, h3, p {
+  padding-bottom: 15px;
+}
+.last {
+  padding-bottom: 20px;
 }
 </style>

@@ -1,7 +1,10 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <img alt="BB-8 photo header." src="../assets/bb8.jpg" class="header-img">
+    <div class="content">
+      <img alt="Picture of me." src="../assets/me.jpg" class="me-img">
+      <HelloWorld msg="Hi! My name is Gergana,"/>
+    </div>
   </div>
 </template>
 
@@ -16,3 +19,21 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.content {
+  text-align: left;
+  max-width: 600px;
+  margin: auto;
+}
+.home .header-img {
+  width: 100%;
+}
+.me-img {
+  width: 6em;
+  min-width: 50px;
+  border-radius: 50%;
+  margin-left: 1em;
+  margin-top: -3.5em;
+}
+</style>
