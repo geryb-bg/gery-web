@@ -25,6 +25,7 @@ export default {
   text-align: left;
   max-width: 900px;
   margin: auto;
+  padding: 0 10px;
 }
 .home .header-img {
   width: 100%;

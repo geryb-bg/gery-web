@@ -59,10 +59,10 @@ ul {
 }
 li {
   display: inline-block;
-  margin: 0 0.8em;
+  margin: 0 0.3em;
   padding: 1em;
   margin-bottom: 0.5em;
-  width: 15em;
+  width: 20em;
   box-shadow: 1px 1px 1px #282828;
 }
 .talks li a {

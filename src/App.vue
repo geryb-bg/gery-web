@@ -17,7 +17,6 @@
   -moz-osx-font-smoothing: grayscale;
   color: #0c0032;
   text-align: center;
-  font-size: 1.5em;
 }
 #nav {
   padding: 0.2em;
@@ -47,7 +46,6 @@ a {
 
 h1 {
   color: #3500d3;
-  font-size: 2.5em;
 }
 
 #app {
@@ -56,14 +54,14 @@ h1 {
 
 .page {
   min-height: 100%;
-  margin-bottom: -40.5px;
+  margin-bottom: -27px;
 }
 .page:after {
   content: "";
   display: block;
 }
 #nav, .page:after {
-  height: 31.5px; 
+  height: 21px; 
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Changa', sans-serif;
