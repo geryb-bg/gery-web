@@ -187,8 +187,6 @@ And now, we can finally write some more code:
   }
   ```
 
-At this point you can upload the code again and see if the data is being sent correctly.
-
-//TODO: Receive config
+At this point you can upload the code again and the temperature should be sent over MQTT to your telemetry topic.
 
 //TODO: read data node (optional)
