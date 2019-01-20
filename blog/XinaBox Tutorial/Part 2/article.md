@@ -13,8 +13,8 @@ The first thing we need to do is connect our core programming chip to the intern
 - First we will include the WiFi library like this `#include <WiFi.h>`
 - Next we need to define the SSID and Password of the network we will be connecting to:
   ```c
-  #define WIFI_SSID "<Your SSID>"
-  #define WIFI_PASSWORD "<Your password>"
+  #define WIFI_SSID "My SSID"
+  #define WIFI_PASSWORD "My password"
   ```
 - And now we can connect to the WiFi with this code:
   ```c
