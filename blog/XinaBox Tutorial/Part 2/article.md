@@ -1,11 +1,13 @@
 # Playing with XinaBox Part 2
 
-In [part one](https://medium.com/@gerybbg/playing-with-xinabox-part-1-cfb742b676e7) of this tutorial series we created a temperature sensor. Although this little thing that we built is pretty cool, we have pretty much built a fancy thermometer. What's cooler than a fancy thermometer? A fancy thermometer that is connected to the internet. So, let's send our data to the cloud.
+In [part one](https://medium.com/@gerybbg/playing-with-xinabox-part-1-cfb742b676e7) of this tutorial series we created a temperature sensor. Although this little thing that we built is pretty cool, we have pretty much built a fancy thermometer. What's cooler than a fancy thermometer? Well, how about a fancy thermometer that is connected to the internet. So, let's send our data to the cloud.
+
+> One thing to note, for part 2 you are not necessarily limited to having the XinaBox components. You can achieve the same thing with a [ESP32](https://www.espressif.com/en/products/hardware/esp32/overview), [BME680](https://www.bosch-sensortec.com/bst/products/all_products/bme680) and an [OLED Display](http://www.solomon-systech.com/en/product/display-ic/oled-driver-controller/ssd1306/).
 
 ### What you will need
 - The XinaBox [device](https://medium.com/@gerybbg/playing-with-xinabox-part-1-cfb742b676e7) we built in part 1
 - A [Google Cloud Platform](https://console.cloud.google.com) account
-- [Node.js](https://nodejs.org/en/) (_Optional if you would like to run the app that reads the data from GCP IoT Core_)
+- [Node.js](https://nodejs.org/en/) installed on your computer (_Optional if you would like to run the app that reads the data from GCP IoT Core_)
 
 ### Connecting to WiFi
 The first thing we need to do is connect our core programming chip to the internet. To do that we need to add some changes to our code.
@@ -54,13 +56,13 @@ Upload this code to your device to make sure you can connect to the internet.
 ### Sending data to the cloud
 Now we can connect to the cloud and send data there. In this case we will be using Google Cloud Platform IoT Core.
 
-There are two ways to setup your devices in GCP IoT Core, one is by using the [gcloud SDK](https://cloud.google.com/sdk/) which allows you to do everything via command line. The other is by doing it in the console, or as I like to call it the "clicky" way. In this tutorial I will tell you how to do it the "clicky" way.
+There are two ways to setup your devices in GCP IoT Core, one is by using the [gcloud SDK](https://cloud.google.com/sdk/) which allows you to do everything via command line. The other is by doing it in the console, or as I like to call it the "clicky" way. In this tutorial we will do everything the "clicky" way.
 
 - Open up [GCP](https://console.cloud.google.com/) and log in
 - Create a new project
-- From the side menu click on *IoT Core*, this will prompt you to enable IoT Core API
+- From the side menu click on _IoT Core_, this will prompt you to enable IoT Core API
 - Once enabled it will prompt you to create a device registry. When creating a device registry you will also need to create to PubSub topics, one for telemetry data and one for state data. Although you can use the same topic for both of these, it is a good idea to keep them separate.
-- After this is all done you are ready to add devices to your registry. In order to create a device you will need a public/private key pair to secure the communication between your device and the cloud. For this library to work we will be using an Elliptic Curve (EC) public/private key pair. To generate these run the following two commands in your terminal:
+- After this is all done you are ready to add devices to your registry. In order to create a device you will need a public/private key pair to secure the communication between your device and the cloud. For this example we will be using an Elliptic Curve (EC) public/private key pair. To generate these run the following two commands in your terminal:
 ```
 openssl ecparam -genkey -name prime256v1 -noout -out my_private_key.pem
 openssl ec -in ec_private.pem -pubout -out my_public_key.pem
@@ -116,7 +118,7 @@ And now, we can finally write some more code:
       "c7o835DLAFshEWfC7TIe3g==\n"
       "-----END CERTIFICATE-----\n";
   ```
-- To get the private key string run the command `openssl ec -in ec_private.pem -noout -text` in the folder where you created your keys and copy the private key part. It should be the exact same length as the one in the example above.
+- To get the private key string run the command `openssl ec -in my_private_key.pem -noout -text` in the folder where you created your keys and copy the private key part. It should be the exact same length as the one in the example above.
 - To get the root cert run the command `openssl s_client -showcerts -connect mqtt.googleapis.com:8883` and copy the certificate.
 - Next we need to include some libraries and define some variables:
   ```c
@@ -144,7 +146,7 @@ And now, we can finally write some more code:
     OD01.println("MQTT started");
   }
   ```
-- Then inside our loop method we need to do two things. Check if we are connected to the MQTT client and if not connect to it. And after that we can publish the temperature data to MQTT. We do this by replacing our MQTT method with the following:
+- Then inside our loop method we need to do two things. Check if we are connected to the MQTT client and if not connect to it. After that we can publish the temperature data to MQTT. We do this by replacing our `loop()` method with the following:
   ```c
   void loop() {
     if (!mqttClient->connected()) {
@@ -189,4 +191,42 @@ And now, we can finally write some more code:
 
 At this point you can upload the code again and the temperature should be sent over MQTT to your telemetry topic.
 
-//TODO: read data node (optional)
+> I had a problem here where I was getting an error that said _Multiple libraries were found for "WiFi.h"_, the full error specifies where the multiple libraries are and which one is and is not used. To get rid of the error I deleted the folder that the IDE told me was not being used. I am not sure if this broke something else, but nothing has fallen apart so far.
+
+### Receive data from PubSub topic (Optional)
+This last little bit here I marked as optional because it is more for a sanity check to make sure that the data is actually being sent. To do this part there are two things you have to do in the console. Open up the [console](https://console.cloud.google.com) and make sure you have the correct project selected:
+
+- From the side navigation click on _IoT Core_, select your registry and then select your telemetry topic. Select _Create subscription_ at the top name your subscription and choose the delivery type as _Pull_.
+- From the side navigation go to _IAM & admin_ and select _Service accounts_. From the top menu select _Create service account_. Give your service account a name and a description and grant the _Owner_ role for the project. On the next page, click on _Create key_ and create and download a JSON key.
+
+Once that is done we can write some JavaScript to get our data from the subscription we created, this code looks like this:
+
+```js
+const PubSub = require('@google-cloud/pubsub');
+
+const pubsub = new PubSub({
+    projectId: 'my-project',
+    keyFilename: 'path-to-my-service-account.json'
+});
+const subscriptionName = 'my-subscription';
+const subscription = pubsub.subscription(subscriptionName);
+
+const messageHandler = (message) => {
+    console.log(`message received ${message.data}`);
+    message.ack();
+};
+
+subscription.on(`message`, messageHandler);
+
+process.on('SIGINT', function() {
+    console.log('Closing connection. Goodbye!');
+    subscription.removeListener('message', messageHandler);
+    process.exit();
+});
+```
+
+Here we are using the Google Cloud PubSub library which you will have to install using npm: `npm install @google-cloud/pubsub`. We are then connecting to the subscription using the service account we created, listening for messages being sent and logging them to the console.
+
+### Conclusion
+
+That was quite a lot to get through, if you got lost anywhere along the way checkout [the final code on GitHub](https://github.com/geryb-bg/gery-web/tree/master/blog/XinaBox%20Tutorial/Part%202/code). In part three we'll be going into how we can control the devices from IoT Core so that we could have two separate devices communicating with each other.
