@@ -16,7 +16,7 @@
         <p>1 December 2018</p>
       </li>
       <li>
-        <a href="" target="_blank">Automate your life with Azure</a>
+        <a href="https://www.youtube.com/watch?v=QJElzeytfHg" target="_blank">Automate your life with Azure</a>
         <h4>JoziJS</h4>
         <p>22 November 2018</p>
       </li>
@@ -34,7 +34,7 @@
     <p>For a full list of talks you can take a look at <a href="https://www.youtube.com/watch?v=jDt559_PeWI&list=PLzkFC7qpj2Jnqc1coWb3Jgp6QwP4gbocC" target="_blank">this YouTube playlist</a>.</p>
     <h3>I am also trying out this blogging thing.</h3>
     <p class="last">
-      I haven't gotten very far with it, but you can check out my first article on <a href="https://medium.com/@gerybbg" target="_blank">Medium</a>.
+      I haven't gotten very far with it, but you can check out some of my articles on <a href="https://medium.com/@gerybbg" target="_blank">Medium</a>.
     </p>
   </div>
 </template>
