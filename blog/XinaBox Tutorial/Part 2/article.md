@@ -1,6 +1,8 @@
 # Playing with XinaBox Part 2
 
-In [part one](https://medium.com/@gerybbg/playing-with-xinabox-part-1-cfb742b676e7) of this tutorial series we created a temperature sensor. Although this little thing that we built is pretty cool, we have pretty much built a fancy thermometer. What's cooler than a fancy thermometer? Well, how about a fancy thermometer that is connected to the internet. So, let's send our data to the cloud.
+![header logo](images/header.jpg "")
+
+In [part one](https://medium.com/@gerybbg/playing-with-xinabox-part-1-cfb742b676e7) of this tutorial series we created a temperature sensor. Although this little thing that we built is pretty cool, we have pretty much built a fancy thermometer. What's cooler than a fancy thermometer? Well, how about a fancy thermometer that is connected to the internet?
 
 > One thing to note, for part 2 you are not necessarily limited to having the XinaBox components. You can achieve the same thing with a [ESP32](https://www.espressif.com/en/products/hardware/esp32/overview), [BME680](https://www.bosch-sensortec.com/bst/products/all_products/bme680) and an [OLED Display](http://www.solomon-systech.com/en/product/display-ic/oled-driver-controller/ssd1306/).
 
@@ -13,7 +15,7 @@ In [part one](https://medium.com/@gerybbg/playing-with-xinabox-part-1-cfb742b676
 The first thing we need to do is connect our core programming chip to the internet. To do that we need to add some changes to our code.
 
 - First we will include the WiFi library like this `#include <WiFi.h>`
-- Next we need to define the SSID and Password of the network we will be connecting to:
+- Next we need to define the SSID and password of the network we will be connecting to:
   ```c
   #define WIFI_SSID "My SSID"
   #define WIFI_PASSWORD "My password"
@@ -38,7 +40,7 @@ The first thing we need to do is connect our core programming chip to the intern
   }
   ```
 
-This method needs to be called from inside the setup method. What it does is it attempts to connect to the internet and if it does not succeed for any reason (for example the chip is too far away from the router) it tries again after 5 seconds.
+This method needs to be called from inside the `setup()` method. It attempts to connect to the internet and if it does not succeed for any reason (for example the chip is too far away from the router) it tries again after 5 seconds.
 
 In order to be able to upload data to the cloud our core chip needs to have the correct timestamp. The CW02 (and it's ESP32 equivalent) can not keep time, however, when they are connected to a WiFi network a time can be set on them. To do this we need to add the following method and call it right after `initWifi()` in the `setup()` method.
 
@@ -56,7 +58,7 @@ Upload this code to your device to make sure you can connect to the internet.
 ### Sending data to the cloud
 Now we can connect to the cloud and send data there. In this case we will be using Google Cloud Platform IoT Core.
 
-There are two ways to setup your devices in GCP IoT Core, one is by using the [gcloud SDK](https://cloud.google.com/sdk/) which allows you to do everything via command line. The other is by doing it in the console, or as I like to call it the "clicky" way. In this tutorial we will do everything the "clicky" way.
+There are two ways to setup your devices in GCP IoT Core, one is by using the [gcloud SDK](https://cloud.google.com/sdk/) which allows you to do everything via command line. The other is by doing it in the online console, or as I like to call it the "clicky" way. In this tutorial we will do everything the "clicky" way.
 
 - Open up [GCP](https://console.cloud.google.com/) and log in
 - Create a new project
@@ -67,7 +69,7 @@ There are two ways to setup your devices in GCP IoT Core, one is by using the [g
 openssl ecparam -genkey -name prime256v1 -noout -out my_private_key.pem
 openssl ec -in ec_private.pem -pubout -out my_public_key.pem
 ```
-- Now you can create the device, remember to name your device something meaningful as this can not change once it has been created. You will also have to choose *ES256* as your algorithm and copy the entire public key including the `-----BEGIN PUBLIC KEY-----` and `-----END PUBLIC KEY-----` parts.
+- Now you can create the device, remember to name your device something meaningful as this can not change once it has been created. You will also have to choose *ES256* as your algorithm and copy the entire public key including the `BEGIN PUBLIC KEY` and `END PUBLIC KEY` parts.
 
 Before we can get back to the code, we will need to install a few libraries. Go to Sketch-Include Library-Manage Libraries... and search for and install the following:
 
@@ -194,7 +196,7 @@ At this point you can upload the code again and the temperature should be sent o
 > I had a problem here where I was getting an error that said _Multiple libraries were found for "WiFi.h"_, the full error specifies where the multiple libraries are and which one is and is not used. To get rid of the error I deleted the folder that the IDE told me was not being used. I am not sure if this broke something else, but nothing has fallen apart so far.
 
 ### Receive data from PubSub topic (Optional)
-This last little bit here I marked as optional because it is more for a sanity check to make sure that the data is actually being sent. To do this part there are two things you have to do in the console. Open up the [console](https://console.cloud.google.com) and make sure you have the correct project selected:
+This last little bit here I marked as optional because it is more for a sanity check to make sure that the data is actually being sent. There are two things you have to do in the online console first, before we get to the code. Open up the [console](https://console.cloud.google.com) and make sure you have the correct project selected:
 
 - From the side navigation click on _IoT Core_, select your registry and then select your telemetry topic. Select _Create subscription_ at the top name your subscription and choose the delivery type as _Pull_.
 - From the side navigation go to _IAM & admin_ and select _Service accounts_. From the top menu select _Create service account_. Give your service account a name and a description and grant the _Owner_ role for the project. On the next page, click on _Create key_ and create and download a JSON key.
@@ -225,7 +227,7 @@ process.on('SIGINT', function() {
 });
 ```
 
-Here we are using the Google Cloud PubSub library which you will have to install using npm: `npm install @google-cloud/pubsub`. We are then connecting to the subscription using the service account we created, listening for messages being sent and logging them to the console.
+Here we are using the Google Cloud PubSub library which you will have to install using npm: `npm install @google-cloud/pubsub`. We are then connecting to the subscription using the service account we created, listening for messages being sent and logging them to the console. You can run this code using Node.js.
 
 ### Conclusion
 
