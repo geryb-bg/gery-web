@@ -67,7 +67,7 @@ There are two ways to setup your devices in GCP IoT Core, one is by using the [g
 - After this is all done you are ready to add devices to your registry. In order to create a device you will need a public/private key pair to secure the communication between your device and the cloud. For this example we will be using an Elliptic Curve (EC) public/private key pair. To generate these run the following two commands in your terminal:
 ```
 openssl ecparam -genkey -name prime256v1 -noout -out my_private_key.pem
-openssl ec -in ec_private.pem -pubout -out my_public_key.pem
+openssl ec -in my_private_key.pem -pubout -out my_public_key.pem
 ```
 - Now you can create the device, remember to name your device something meaningful as this can not change once it has been created. You will also have to choose *ES256* as your algorithm and copy the entire public key including the `BEGIN PUBLIC KEY` and `END PUBLIC KEY` parts.
 
