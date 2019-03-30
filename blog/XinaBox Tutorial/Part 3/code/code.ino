@@ -7,6 +7,10 @@
 #include "xOD01.h"
 xOD01 OD01;
 
+//relay - ** including the relay library and declaring a relay
+#include <xOC03.h>
+xOC03 OC03;
+
 //cloud
 #include <MQTT.h>
 #include <CloudIoTCore.h>
@@ -22,6 +26,7 @@ String jwt;
 void setup() {
   Wire.begin();
   OD01.begin();
+  OC03.begin(); //starting the relay
   
   pinMode(BLUE_PIN, OUTPUT);
   pinMode(RED_PIN, OUTPUT);
@@ -70,14 +75,19 @@ void initCloudIoT() {
 
 void messageReceived(String &topic, String &payload) {
   OD01.println(".");
-  OD01.println("Config update: " + payload);
+  OD01.println(payload);
+  float f = atof(payload.c_str());
+  if (f > 30) {
+    OC03.write(HIGH);
+  } else if (f < 20) {
+    OC03.write(LOW);
+  }
 }
 
 void loop() {
   mqttClient->loop();
   delay(10);
 
-  
   if (!mqttClient->connected()) {
     digitalWrite(RED_PIN, HIGH);
     if (WiFi.status() != WL_CONNECTED) {
@@ -87,10 +97,8 @@ void loop() {
     digitalWrite(RED_PIN, LOW);
   }
 
-  digitalWrite(GREEN_PIN, HIGH);
   OD01.print(".");
-  digitalWrite(GREEN_PIN, LOW);  
-  delay(5000);
+  delay(500);
 }
 
 void mqttConnect() {

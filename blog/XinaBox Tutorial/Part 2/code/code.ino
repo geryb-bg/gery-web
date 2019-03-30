@@ -95,7 +95,7 @@ void loop() {
   digitalWrite(GREEN_PIN, HIGH);
   bme680.setForcedMode();
   double temperature = bme680.readTemperature();
-  String message = "Temperature " + String(temperature) + "C";
+  String message = "{\"temperature\": " + String(temperature) + "}";
   OD01.println(message);
   mqttClient->publish(device->getEventsTopic(), message);
   digitalWrite(GREEN_PIN, LOW);
