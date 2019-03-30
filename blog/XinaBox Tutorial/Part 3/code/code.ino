@@ -3,6 +3,10 @@
 
 #include "config.h"
 
+//for converting string to float
+#include <stdlib.h>
+#include <stdio.h>
+
 //screen
 #include "xOD01.h"
 xOD01 OD01;

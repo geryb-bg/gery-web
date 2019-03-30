@@ -41,6 +41,10 @@ Take a look at the code below, it should look very similar to the code we have a
 
 #include "config.h"
 
+//for converting string to float
+#include <stdlib.h>
+#include <stdio.h>
+
 #include "xOD01.h"
 xOD01 OD01;
 
@@ -147,7 +151,7 @@ Upload the code to the device and check that it connects successfully.
 
 ### Getting configuration data from the cloud
 
-There are a few things we need to add in order to be able to receive data from the cloud. The first is one the line inside the `initCloudIoT()` method that is commented out (the one starting with `//**`). Replace this commented out line with this line:
+There are a few things we need to add in order to be able to receive data from the cloud. The first is one line inside the `initCloudIoT()` method on the line that is currently commented out (the one starting with `//**`). Replace this commented out line with this line:
 
 ```c
 mqttClient->onMessage(messageReceived);
@@ -168,7 +172,7 @@ void messageReceived(String &topic, String &payload) {
 }
 ```
 
-This method says that when we receive a message, we will print that message on the screen. After that we will check, if the temperature we received is greater than 30 degrees Celsius we will turn the fan on by writing `HIGH` to the relay and if it is lower than 20 degrees Celsius we will turn it off by writing `LOW`.
+This method says that when we receive a message, we will print that message on the screen. After that we will check, if the temperature we received is greater than 30 degrees Celsius we will turn the fan on by writing **HIGH** to the relay and if it is lower than 20 degrees Celsius we will turn it off by writing **LOW**.
 
 We are almost done, there is one more thing we need to do. To ensure that the device continues listening for messages from the cloud we need to add an MQTT client loop method inside our existing `loop()` method. Add the following two lines to the top of the `loop()` method:
 
@@ -181,7 +185,7 @@ Upload this code to the device and we can test it. Once the device has started u
 
 ### Cloud functions
 
-The last thing we want to achieve is to add something in between the two devices so that the whole process does not require any manual interventions. Something that can subscribe to the PubSub topic we created and forward the messages on. This 'thing' is a [Cloud Function](https://github.com/GoogleCloudPlatform/community/tree/master/tutorials/iot-device-to-device/dev2dev) written in JavaScript and it looks like this:
+The last thing we want to achieve is to add something in between the two devices so that the whole process does not require any manual interventions. Something that can subscribe to the PubSub topic we created and forward the messages on. This 'thing' is a [Cloud Function](https://github.com/GoogleCloudPlatform/community/tree/master/tutorials/iot-device-to-device/dev2dev), written in JavaScript and it looks like this:
 
 ```javascript
 'use strict';
@@ -234,4 +238,4 @@ gcloud functions deploy relayCloudIot /
 
 ### Conclusion
 
-Once your function is deployed everything should work. If something is not working as expected you can take a look at the [complete code on GitHub]() to make sure you did not miss anything. In the next part of this series we are going to talk about using Actions on Google to get information from our devices and send information to them using the Google Assistant.
+Once your function is deployed everything should work. If something is not working as expected you can take a look at the [complete code on GitHub](https://github.com/geryb-bg/gery-web/tree/master/blog/XinaBox%20Tutorial/Part%203/code) to make sure you did not miss anything. In the next part of this series we are going to talk about using Actions on Google to get information from our devices and send information to them using the Google Assistant.
