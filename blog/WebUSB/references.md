@@ -1,0 +1,9 @@
+- https://developers.google.com/web/updates/2016/03/access-usb-devices-on-the-web
+- https://wicg.github.io/webusb/
+- https://github.com/WICG/webusb
+- https://labs.mwrinfosecurity.com/blog/webusb/ - security one
+- https://caniuse.com/#feat=webusb
+- https://www.youtube.com/watch?v=4BsunBl4-Wk
+- https://medium.com/@kennethrohde/basic-punch-detection-using-web-usb-d9fd4a1387f7
+- https://gist.github.com/davidkelley/9002267
+- https://medium.com/@gendor/connecting-to-usb-devices-with-your-browser-d433a6df6f2
