@@ -64,14 +64,14 @@ Next we have to claim the interface. An interface is grouping of functions of th
 
 ## `device.controlTransferOut`
 
-This method sends a message from your computer to the device, telling the device that the computer is listening to it. It requires a number of options to be set on it:
+This method sends a message from your computer to the device. The control transfer methods are used for device configuration. It pretty much sets up the device, class or interface to be able to communicate with your computer. It requires a number of options to be set on it:
 
 1. `requestType`: specifies whether the request we are sending is a vendor specific protocol, part of the USB standard or - like in our code - a specific class on the USB device.
 1. `recipient`: sets whether we are transferring control to the device as a whole, or a specific endpoint or interface.
 1. `request`: determines what we are requesting the device to do. Requests can be set by the USB standard, the device class specification or they can be vendor specific.
 1. `value` and `index`: These are populated based on the previous fields. In our example the `value` is set based on what the class specification expects and the `index` is set to the interface number because our `recipient` is the interface.
 
-These options together are sent as a header to the default control transfer endpoint. Every USB device has a default endpoint, usually `endpointNumber` 0.
+These options together are sent as a header to the default control transfer endpoint. Every USB device has a default endpoint, usually `endpointNumber` 0. 
 
 ## `device.transferIn`
 
@@ -81,7 +81,7 @@ Lastly, we are saying that we want to wait for the device to send us some data. 
 
 One thing you may be thinking right now is, why are there so many seemingly random numbers in this code?
 
-Well, they are not random, they all come from somewhere:
+Well, they are not random, they all come from somewhere, usually the device or vendor specifications, here is how you can find them:
 
 - **Vendor ID** and/or **product ID**: These can be found in different ways based on your operating system or you can check [this list](http://www.linux-usb.org/usb.ids) and see if the device you have is in there.
 - **Configuration** and **interface**: If you have the data sheet for your USB device then these should be listed in there. If you do not, you can start at 0 and try a few different numbers. The WebUSB API gives you an error saying that the configuration/interface does not exist. If you receive this error you increase the number by 1 and try again until you find the correct number.
