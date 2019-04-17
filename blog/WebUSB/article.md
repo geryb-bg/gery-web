@@ -1,8 +1,8 @@
 # USB: a web developer perspective
 
-One of the reason I really like my job is because I get to work with the technologies that I love. Two of these technologies are JavaScript and IoT. Now, I know you might think I'm crazy when I say this next part, but one of my favorite pass times is trying to make these two technologies work together. Taking what would generally be considered a "dumb" device and making it smart by using JavaScript. For this reason I was really excited when I heard about WebUSB.
+One of the reason I really like my job is because I get to work with the technologies that I love. Two of these technologies are JavaScript and IoT. Now, I know you might think I'm crazy when I say this next part, but one of my favorite pass times is trying to make these two technologies work together. Taking what would generally be considered a "dumb" device and making it smart by using JavaScript and the web. For this reason I was really excited when I heard about WebUSB.
 
-The WebUSB API is a relatively new standard which allows us to access USB devices from the browser. There are a number of tutorials, articles and talks online which explain what the purpose of this new technology is and how to use it. The following list has some of the resources I have been using to figure this out:
+The WebUSB API allows us to access USB devices from the browser. There are a number of tutorials, articles and talks online which explain what the purpose of this new technology is and how to use it. The following list has some of the resources I have been using:
 
 - [Access USB Devices on the Web](https://developers.google.com/web/updates/2016/03/access-usb-devices-on-the-web)
 - [Exploring WebUSB and its exciting potential - Suz Hinton - JSConf US 2018](https://www.youtube.com/watch?v=IpfZ8Nj3uiE)
@@ -12,11 +12,13 @@ These are all great resources, and there are so many more. However, almost all o
 
 > You have to understand how the USB standard works in order to be able to use this API.
 
-In this post, I would like to share with you the web developer version of the USB standard. Or at least the parts you need to understand in order to get started with the WebUSB API. Let's take a look at some code ([adapted from this post](https://developers.google.com/web/updates/2016/03/access-usb-devices-on-the-web)):
+This seems like a reasonable statement, in order to use something you should understand it, right? There are also some really good resources on understanding the USB standard, for example [USB in a NutShell](https://www.beyondlogic.org/usbnutshell/usb1.shtml). However, if you are a web developer like me, and reading hundreds of pages of hardware architecture is not really your thing, then keep reading.
+
+This blog post is the short (web developer) version of the USB standard, the parts I needed in order to hack some USB devices with JavaScript. Let's take a look at some code ([adapted from this post](https://developers.google.com/web/updates/2016/03/access-usb-devices-on-the-web)):
 
 ```js
 let device;
-let vendorId = 0x00; //the vendor ID of the USB device
+let vendorId = 0x00;
 
 navigator.usb.requestDevice({ filters: [{ vendorId }] })
 .then(selectedDevice => {
@@ -36,7 +38,7 @@ navigator.usb.requestDevice({ filters: [{ vendorId }] })
 .catch(error => { console.log(error); });
 ```
 
-Besides the callback hell you see above there are also a number of important methods we need to understand:
+The WebUSB API relies heavily on promises, as you can see in the code above. Assuming that you are familiar with promises, lets move on to the parts that are related to the API:
 
 ## `vendorId`
 
@@ -50,7 +52,7 @@ This method can only be called from a user gesture, for instance a button click.
 
 ## `device.open`
 
-Once you choose a device to connect to the connection is started by calling the `open()` method.
+Choosing one of the devices in the image above and clicking "Connect" means that you are giving this website permission to connect to this device. The connection is started by calling the `open()` method.
 
 ## `device.selectConfiguration`
 
@@ -61,9 +63,30 @@ Now that we have established a connection we have to find which of the device's 
 Next we have to claim the interface. An interface is grouping of functions of the device which together form one feature that the device can perform. By claiming the interface we are taking control of that particular feature of the device. We do that by communicating with the input and output endpoints of the selected interface.
 
 ## `device.controlTransferOut`
+
+This method sends a message from your computer to the device, telling the device that the computer is listening to it. It requires a number of options to be set on it:
+
+1. `requestType`: specifies whether the request we are sending is a vendor specific protocol, part of the USB standard or - like in our code - a specific class on the USB device.
+1. `recipient`: sets whether we are transferring control to the device as a whole, or a specific endpoint or interface.
+1. `request`: determines what we are requesting the device to do. Requests can be set by the USB standard, the device class specification or they can be vendor specific.
+1. `value` and `index`: These are populated based on the previous fields. In our example the `value` is set based on what the class specification expects and the `index` is set to the interface number because our `recipient` is the interface.
+
+These options together are sent as a header to the default control transfer endpoint. Every USB device has a default endpoint, usually `endpointNumber` 0.
+
 ## `device.transferIn`
 
-Explain differences between types of transfers...
-- https://wicg.github.io/webusb/#appendix-transfers
+Lastly, we are saying that we want to wait for the device to send us some data. We provide the endpoint on which we will be listening, this is a different endpoint to the default one. We also state how many bytes we are expecting to receive from that endpoint.
+
+## Why so many numbers?
+
+One thing you may be thinking right now is, why are there so many seemingly random numbers in this code?
+
+Well, they are not random, they all come from somewhere:
+
+- Vendor and/or product ID: These can be found in different ways based on your operating system or you can check [this list](http://www.linux-usb.org/usb.ids) and see if the device you have is in there.
+- Configuration and Interface: If you have the data sheet for your USB device then these should be listed in there. If you do not, you can start at 0 and try a few different numbers. The WebUSB API gives you an error saying that the configuration/interface does not exist. If you receive this error you increase the number by 1 and try again until you find the correct number.
+- Endpoints and data to transfer in/out: If you are trying to play with a USB device that is not programmable and does not have open source drivers that you could take a look at, then this part is a little more difficult. You will need to install the actual device drivers on your computer and then use a tool like Wireshark to see what packets are being sent between the device and your computer.
 
 ## Conclusion
+
+The WebUSB API provides us with really cool new opportunities to access hardware using JavaScript. Although there are still some security concerns and quite a few support concerns ([see here](https://caniuse.com/#feat=webusb)) it is still an exciting prospect and I look forward to learning more about it.
