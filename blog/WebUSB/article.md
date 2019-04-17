@@ -83,7 +83,7 @@ One thing you may be thinking right now is, why are there so many seemingly rand
 
 Well, they are not random, they all come from somewhere, usually the device or vendor specifications, here is how you can find them:
 
-- **Vendor ID** and/or **product ID**: These can be found in different ways based on your operating system or you can check [this list](http://www.linux-usb.org/usb.ids) and see if the device you have is in there.
+- **Vendor ID** and/or **product ID**: These can be found in different ways based on your operating system. For example, on MacOS you need to go to the 🍎 icon, choose _About This Mac_, _System report..._ and under _Hardware_ click on _USB_. You can also check [this list](http://www.linux-usb.org/usb.ids) and see if the device you have is in there.
 - **Configuration** and **interface**: If you have the data sheet for your USB device then these should be listed in there. If you do not, you can start at 0 and try a few different numbers. The WebUSB API gives you an error saying that the configuration/interface does not exist. If you receive this error you increase the number by 1 and try again until you find the correct number.
 - **Endpoints** and **data** to transfer **in**/**out**: If you are trying to play with a USB device that is not programmable and does not have open source drivers that you could take a look at, then this part is a little more difficult. You will need to install the actual device drivers on your computer and then use a tool like Wireshark to see what packets are being sent between the device and your computer.
 
