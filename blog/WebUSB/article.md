@@ -17,52 +17,86 @@ This seems like a reasonable statement, in order to use something you should und
 This blog post is the short (web developer) version of the USB standard, the parts I needed in order to hack some USB devices with JavaScript. Let's take a look at some code ([adapted from this post](https://developers.google.com/web/updates/2016/03/access-usb-devices-on-the-web)):
 
 ```js
-let device;
 let vendorId = 0x00;
+let device = await navigator.usb.requestDevice({ filters: [{ vendorId }] });
 
-navigator.usb.requestDevice({ filters: [{ vendorId }] })
-.then(selectedDevice => {
-   device = selectedDevice;
-   return device.open();
- })
-.then(() => device.selectConfiguration(1))
-.then(() => device.claimInterface(2))
-.then(() => device.controlTransferOut({
+await device.open();
+await device.selectConfiguration(1);
+await device.claimInterface(2);
+
+await device.controlTransferOut({
     requestType: 'class',
     recipient: 'interface',
     request: 0x22,
     value: 0x01,
-    index: 0x02}))
-.then(() => device.transferIn(5, 64))
-.then(result => console.log(`Received: ${result}`))
-.catch(error => { console.log(error); });
+    index: 0x02});
+
+let result = await device.transferIn(5, 64);
+console.log(`Received: ${result}`);
 ```
 
 The WebUSB API relies heavily on promises, as you can see in the code above. Assuming that you are familiar with promises, lets move on to the parts that are related to the API:
 
-## `vendorId`
+## Vendor ID
+
+```js
+let vendorId = 0x00;
+```
 
 The vendor ID is a hexadecimal number that is assigned by the [USB-IF](https://www.usb.org/) and the manufacturer of the device. This ID as well as the product ID can be added to the filters of the request device method. If there are no filters specified then all of the USB devices plugged in to your computer will be returned.
 
-## `requestDevice`
+## Request devices
 
-This method can only be called from a user gesture, for instance a button click. This is a security feature, it means that you as the user have to initiate the scan for USB devices plugged into your computer. This scan produces a list of devices and allows you to choose one to connect to. For example, this is the scan on my computer without any filters:
+```js
+let device = await navigator.usb.requestDevice({ filters: [{ vendorId }] });
+```
+
+This method can only be called from a user gesture, for instance a button click. This is a security feature, it means that you as the user have to initiate the scan for USB devices plugged into your computer. This scan produces a list of devices and allows you to choose one to connect to.
+
+For example, if I run the following code on my computer:
+
+```js
+let device = await navigator.usb.requestDevice({ filters: [] });
+```
+
+I get the result:
 
 ![alt request device scan](images/requestdevice.png "")
 
-## `device.open`
+## Connect
+
+```js
+await device.open();
+```
 
 Choosing one of the devices in the image above and clicking "Connect" means that you are giving this website permission to connect to this device. The connection is started by calling the `open()` method.
 
-## `device.selectConfiguration`
+## Select configuration
+
+```js
+await device.selectConfiguration(1);
+```
 
 Now that we have established a connection we have to find which of the device's configurations we can communicate with. There are not many devices that have more than one configuration. The configuration consists of values for the amount of power needed, if the device is self or bus powered and the number of interfaces it has. The important part to remember here is that only one configuration is enabled at a time. The enabled configuration is how, for example, your cellphone knows if it is plugged into a laptop or straight into the mains.
 
-## `device.claimInterface`
+## Claim interface
+
+```js
+await device.claimInterface(2);
+```
 
 Next we have to claim the interface. An interface is grouping of functions of the device which together form one feature that the device can perform. By claiming the interface we are taking control of that particular feature of the device. We do that by communicating with the input and output endpoints of the selected interface.
 
-## `device.controlTransferOut`
+## Control transfer
+
+```js
+await device.controlTransferOut({
+    requestType: 'class',
+    recipient: 'interface',
+    request: 0x22,
+    value: 0x01,
+    index: 0x02});
+```
 
 This method sends a message from your computer to the device. The control transfer methods are used for device configuration. It pretty much sets up the device, class or interface to be able to communicate with your computer. It requires a number of options to be set on it:
 
@@ -73,7 +107,12 @@ This method sends a message from your computer to the device. The control transf
 
 These options together are sent as a header to the default control transfer endpoint. Every USB device has a default endpoint, usually `endpointNumber` 0. 
 
-## `device.transferIn`
+## Transfer
+
+```js
+let result = await device.transferIn(5, 64);
+console.log(`Received: ${result}`);
+```
 
 Lastly, we are saying that we want to wait for the device to send us some data. We provide the endpoint on which we will be listening, this is a different endpoint to the default one. We also state how many bytes we are expecting to receive from that endpoint.
 
