@@ -1,5 +1,7 @@
 # USB: a web developer perspective
 
+![header logo](images/header.jpg "")
+
 One of the reason I really like my job is because I get to work with the technologies that I love. Two of these technologies are JavaScript and IoT. Now, I know you might think I'm crazy when I say this next part, but one of my favorite pass times is trying to make these two technologies work together. Taking what would generally be considered a "dumb" device and making it smart by using JavaScript and the web. For this reason I was really excited when I heard about WebUSB.
 
 The WebUSB API allows us to access USB devices from the browser. There are a number of tutorials, articles and talks online which explain what the purpose of this new technology is and how to use it. The following list has some of the resources I have been using:
