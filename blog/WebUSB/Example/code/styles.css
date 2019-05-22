@@ -1,0 +1,27 @@
+body {
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .button {
+    background-color: black;
+    border: none;
+    color: #ffc000;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+  #connected, #disconnectButton {
+    display: none;
+    font-size: 24px;
+  }
+  
+  #pinNumber {
+      font-size: 24px;
+      width: 50px;
+  }
