@@ -1,6 +1,8 @@
 # WebUSB by example
 
-I have spent the last few weeks doing more research into the WebUSB API, how it works and what it can be used for. If you have not yet, take a look at the previous article I wrote on this topic: [USB: A web developer perspective](https://medium.com/@gerybbg/usb-a-web-developer-perspective-cbee13883c89). Even after reading a lot about the topic, I still struggled, until I tried it myself.
+![header logo](images/header.png "")
+
+I have been researching the WebUSB API for a while now, how it works and what it can be used for. If you have not yet, take a look at the previous article I wrote on this topic: [USB: A web developer perspective](https://medium.com/@gerybbg/usb-a-web-developer-perspective-cbee13883c89). Even after reading a lot about the topic, I still struggled, until I tried it myself.
 
 I always find that the best way to learn is to write some code, so in this article we are going to do exactly that.
 
