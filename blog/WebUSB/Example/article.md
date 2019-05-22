@@ -9,6 +9,7 @@ I always find that the best way to learn is to write some code, so in this artic
 ## What you will need
 
 - [nRF52 dongle](https://www.nordicsemi.com/?sc_itemid=%7BCDCCA013-FE4C-4655-B20C-1557AB6568C9%7D)
+- [nrfutil](https://github.com/NordicSemiconductor/pc-nrfutil)
 - [http-server](https://www.npmjs.com/package/http-server) (or something similar)
 
 ## The hardware
