@@ -103,7 +103,7 @@ colourButton.onclick = async () => {
 };
 ```
 
-That's all we need to get our LED to change colours. Run the code again and change the LED colour a few times.
+We are sending the data to endpoint number 2 by using the transferOut method. That's all we need to get our LED to change colours. Run the code again and change the LED colour a few times.
 
 ## Listening for data
 
@@ -130,7 +130,7 @@ const listen = async () => {
 };
 ```
 
-The device sends us two types of messages:
+We are listening on endpoint 3 and expecting the device to send us 64 bytes of data. The device sends us two types of messages:
 
 - A device heartbeat, so that we can ensure we are still connected to it.
 - A button pressed message, when the button is pressed (1) and released (0).
