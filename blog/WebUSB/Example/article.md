@@ -2,19 +2,19 @@
 
 ![header logo](images/header.png "")
 
-I have been researching the WebUSB API for a while now, how it works and what it can be used for. If you have not yet, take a look at the previous article I wrote on this topic: [USB: A web developer perspective](https://medium.com/@gerybbg/usb-a-web-developer-perspective-cbee13883c89). Even after reading a lot about the topic, I still struggled, until I tried it myself.
+I have been researching the WebUSB API for a while now, how it works and what it can be used for. If you have not yet, take a look at the previous article I wrote on this topic: [USB: A web developer perspective](https://medium.com/@gerybbg/usb-a-web-developer-perspective-cbee13883c89). Even after reading a lot about the API, I still struggled, until I tried it myself.
 
-I always find that the best way to learn is to write some code, so in this article we are going to do exactly that.
+I always find that the best way to learn is to write some code, so in this article we are going to do exactly that. Using an [nRF52 dongle](https://www.nordicsemi.com/?sc_itemid=%7BCDCCA013-FE4C-4655-B20C-1557AB6568C9%7D) and the code created by Lars Knudsen in [this GitHub repo](https://github.com/larsgk/web-nrf52-dongle) we will build a website that will connect to the device via USB. After we are connected we will add functionality to change the colours of the device's LED from our website. Lastly, we will add in some code to listen for messages sent from the device back to our computer and display those on the page.
 
 ## What you will need
 
 - [nRF52 dongle](https://www.nordicsemi.com/?sc_itemid=%7BCDCCA013-FE4C-4655-B20C-1557AB6568C9%7D)
-- [nrfutil](https://github.com/NordicSemiconductor/pc-nrfutil)
-- [http-server](https://www.npmjs.com/package/http-server) (or something similar)
+- [nrfutil](https://github.com/NordicSemiconductor/pc-nrfutil): for flashing the firmware onto the device
+- [http-server](https://www.npmjs.com/package/http-server) (or something similar): for starting up our website locally
 
 ## The hardware
 
-Something important to understand about the WebUSB API is that it is not the code that runs on the device. It is the code we use to control the device and communicate with it via USB. This means we still require some code running on the device. In the case of the nRF52 dongle we are going to use [Zephyr](https://www.zephyrproject.org/) and the code created by Lars Knudsen in [this GitHub repo](https://github.com/larsgk/web-nrf52-dongle).
+Something important to understand about the WebUSB API is that it is not the code that runs on the device. It is the code we use to control the device and communicate with it via USB. This means we still require some code running on the device. In the case of the nRF52 dongle we are going to use [Zephyr](https://www.zephyrproject.org/).
 
 If you would like to build the firmware yourself you would first have to follow the instructions for [Getting Started with Zephyr](https://docs.zephyrproject.org/latest/getting_started/index.html). Then, you would have to follow the instructions in [the repo](https://github.com/larsgk/web-nrf52-dongle/tree/master/dongle_firmware) for building the firmware and flashing it onto the device.
 
@@ -22,7 +22,7 @@ I'd prefer to keep the focus of the tutorial on the WebUSB side of things. If yo
 
 ## Connecting
 
-Let's start with connecting to the USB device. I have already created [HTML](https://github.com/geryb-bg/gery-web/blob/master/blog/WebUSB/Example/code/index.html) and [CSS](https://github.com/geryb-bg/gery-web/blob/master/blog/WebUSB/Example/code/styles.css) files for this project as these are not the parts we are going to concentrate on. We are going to concentrate on writing the JavaScript that connects it all together.
+Let's start with connecting to the USB device. I have already created [HTML](https://github.com/geryb-bg/gery-web/blob/master/blog/WebUSB/Example/code/index.html) and [CSS](https://github.com/geryb-bg/gery-web/blob/master/blog/WebUSB/Example/code/styles.css) now all we have to do is  write the JavaScript that connects it all together.
 
 There are however a few small things in the HTML file we need to keep in mind:
 
@@ -31,7 +31,7 @@ There are however a few small things in the HTML file we need to keep in mind:
 - An _input_ of type _color_ with ID `colourPicker`.
 - Two _spans_ with IDs `deviceHeartbeat` and `deviceButtonPressed`.
 
-The first thing we need to do in our JavaScript code is declare all of these elements:
+The first thing we will do in our JavaScript code is declare all of these elements:
 
 ```js
 const connectButton = document.getElementById('connectButton');
@@ -62,7 +62,7 @@ connectButton.onclick = async () => {
 };
 ```
 
-We would also like to be able to disconnect from the device, that part is simply done by calling the `.close()` method:
+We would also like to be able to disconnect from the device, that part is done by calling the `.close()` method:
 
 ```js
 disconnectButton.onclick = async () => {
