@@ -22,7 +22,7 @@ I'd prefer to keep the focus of the tutorial on the WebUSB side of things. If yo
 
 ## Connecting
 
-Let's start with connecting to the USB device. I have already created [HTML](https://github.com/geryb-bg/gery-web/blob/master/blog/WebUSB/Example/code/index.html) and [CSS](https://github.com/geryb-bg/gery-web/blob/master/blog/WebUSB/Example/code/styles.css) now all we have to do is  write the JavaScript that connects it all together.
+Let's start with connecting to the USB device. I have already created [HTML](https://github.com/geryb-bg/gery-web/blob/master/blog/WebUSB/Example/code/index.html) and [CSS](https://github.com/geryb-bg/gery-web/blob/master/blog/WebUSB/Example/code/styles.css)files for our website. Now all we have to do is  write the JavaScript that connects it all together.
 
 There are however a few small things in the HTML file we need to keep in mind:
 
@@ -36,9 +36,12 @@ The first thing we will do in our JavaScript code is declare all of these elemen
 ```js
 const connectButton = document.getElementById('connectButton');
 const disconnectButton = document.getElementById('disconnectButton');
+
 const colourPicker = document.getElementById('colourPicker');
 const colourButton = document.getElementById('colourButton');
+
 const connect = document.getElementById('connect');
+
 const deviceHeartbeat = document.getElementById('deviceHeartbeat');
 const deviceButtonPressed = document.getElementById('deviceButtonPressed');
 ```
@@ -62,7 +65,7 @@ connectButton.onclick = async () => {
 };
 ```
 
-We would also like to be able to disconnect from the device, that part is done by calling the `.close()` method:
+As you can see in the code above we are declaring the device in the global scope so that once we have connected to it we will have access to it in all other parts of the code. We would also like to be able to disconnect from the device, that part is done by calling the `.close()` method:
 
 ```js
 disconnectButton.onclick = async () => {
@@ -74,7 +77,7 @@ disconnectButton.onclick = async () => {
 };
 ```
 
-Run this code using http-server and try connecting and disconnecting from your device. When connected you should see a little USB symbol right next to the close button of your browser tab:
+Run this code using _http-server_ and try connecting and disconnecting from your device. When connected you should see a little USB symbol right next to the close button of your browser tab:
 
 ![alt USB Symbol next to close button](images/usb.png "")
 
@@ -86,7 +89,8 @@ Our colour picker input gives us the hex value of a colour. We need to change th
 
 ```js
 const hexToRgb = (hex) => {
-  const r = parseInt(hex.substring(1,3), 16); //start at 1 to avoid #
+  //start at 1 to avoid #
+  const r = parseInt(hex.substring(1,3), 16);
   const g = parseInt(hex.substring(3,5), 16);
   const b = parseInt(hex.substring(5,7), 16);
 
@@ -103,7 +107,7 @@ colourButton.onclick = async () => {
 };
 ```
 
-We are sending the data to endpoint number 2 by using the transferOut method. That's all we need to get our LED to change colours. Run the code again and change the LED colour a few times.
+We are sending the data to endpoint number 2 by using the `transferOut` method. That's all we need to get our LED to change colours. Run the code again and change the LED colour a few times.
 
 ## Listening for data
 
@@ -143,6 +147,6 @@ We should now have our heartbeat and button presses displayed on the page.
 
 ## Conclusion
 
-This is quite a short example of some of the things you can do with WebUSB, the code for the whole example can be found on [GitHub](https://github.com/geryb-bg/gery-web/tree/master/blog/WebUSB/Example/code). If you would like to take a look at some of the other USB devices I have been playing with, take a look at [this repo](https://github.com/geryb-bg/webusbs) which has an Arduino and Fingerprint reader example.
+These are just some of the things you can do with WebUSB, the code for the whole example can be found on [GitHub](https://github.com/geryb-bg/gery-web/tree/master/blog/WebUSB/Example/code). If you would like to take a look at some of the other USB devices I have been playing with, take a look at [this repo](https://github.com/geryb-bg/webusb) which has an Arduino and Fingerprint reader example.
 
 Lastly, I'd just like to thank [Lars Knudsen](https://twitter.com/denladeside) for the nRF52 dongle, and [Mike Geyser](https://twitter.com/mikegeyser) for bringing it.
