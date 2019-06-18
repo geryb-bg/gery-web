@@ -1,4 +1,4 @@
-# BLE and GATT
+# BLE and GATT and other TLAs
 
 ![header logo](images/header-sml.png "")
 
@@ -8,7 +8,7 @@ The Web Bluetooth API is all about connecting to Bluetooth Low Energy (BLE) devi
 
 - [Interact with Bluetooth devices on the Web](https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web)
 - [Is Now a Good Time to Start using Web Bluetooth?](https://medium.com/@urish/is-now-a-good-time-to-start-using-web-bluetooth-hint-yes-yes-it-is-99e998d7b9f6)
-- [The Mission Bluetooth Module for Angular](https://dev.to/angular/the-web-bluetooth-module-for-angular-314b)
+- [The Missing Bluetooth Module for Angular](https://dev.to/angular/the-web-bluetooth-module-for-angular-314b)
 - [Web Bluetooth API Specification](https://webbluetoothcg.github.io/web-bluetooth/)
 
 First, we need to make sure we understand how the hardware side of things is going to work. In this article, I'd like to tell you what you need to know about BLE and GATT, so that you can hack away at your own Bluetooth devices using JavaScript.
