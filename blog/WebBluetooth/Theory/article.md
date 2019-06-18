@@ -1,6 +1,6 @@
 # BLE and GATT
 
-![header logo](images/header.png "")
+![header logo](images/header-sml.png "")
 
 If you'd asked me ten years ago what I knew about Bluetooth, I would have probably told you it's what we use to send each other photos that we'd taken on our new camera phones. If you'd asked me five years ago, I probably would have mentioned something about all the new fancy cars using Bluetooth for wireless phone calls and playing music. Just over a year ago I started researching Web Bluetooth, and if you ask me now, I could probably talk about it for hours (and I do). The idea of working with Bluetooth devices directly from the browser is really exciting. There is a lot of potential and many use cases for this web platform feature. It is also a really fun technology to play with, since there are so many Bluetooth devices out there.
 
