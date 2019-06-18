@@ -1,10 +1,10 @@
 # BLE and GATT
 
-//TODO header image
+![header logo](images/header.png "")
 
-In the last year and a bit, I have done a few talks on Web Bluetooth. More recently, I started working with USB devices on the web as well. I have written two blog posts about the WebUSB API which you can checkout [here](https://medium.com/@gerybbg/usb-a-web-developer-perspective-cbee13883c89) and [here](https://medium.com/@gerybbg/webusb-by-example-b4358e6a133c). I thought it was time I wrote down some of my findings about the Web Bluetooth API.
+If you'd asked me ten years ago what I knew about Bluetooth, I would have probably told you it's what we use to send each other photos that we'd taken on our new camera phones. If you'd asked me five years ago, I probably would have mentioned something about all the new fancy cars using Bluetooth for wireless phone calls and playing music. Just over a year ago I started researching Web Bluetooth, and if you ask me now, I could probably talk about it for hours (and I do). The idea of working with Bluetooth devices directly from the browser is really exciting. There is a lot of potential and many use cases for this web platform feature. It is also a really fun technology to play with, since there are so many Bluetooth devices out there.
 
-The Web Bluetooth API is all about connecting to Bluetooth Low Energy (BLE) devices directly from the browser. This is a really exciting technology, because it means that web developers, like me, can now use Bluetooth devices in their web applications. It has some limitations, a few [security considerations](https://medium.com/@jyasskin/the-web-bluetooth-security-model-666b4e7eed2), and it is not [completely supported](https://caniuse.com/#feat=web-bluetooth) yet, since it is not on the standardisation path. However, this should not stop you from trying it out. Here are some good resources I used to get started:
+The Web Bluetooth API is all about connecting to Bluetooth Low Energy (BLE) devices directly from the browser. It has a few limitations, however, this should not stop you from trying it out. Here are some good resources I used to get started:
 
 - [Interact with Bluetooth devices on the Web](https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web)
 - [Is Now a Good Time to Start using Web Bluetooth?](https://medium.com/@urish/is-now-a-good-time-to-start-using-web-bluetooth-hint-yes-yes-it-is-99e998d7b9f6)
@@ -46,7 +46,7 @@ const device = await navigator.bluetooth.requestDevice({filters:[{services:[ 'he
 
 In the code above we are initiating a scan for a Bluetooth devices. We are using a filter so that we will only show devices that have a `heart_rate` service (we will talk about the service a little later). This will present the user with something that looks like this:
 
-//TODO image of heart rate monitor scan.
+![scan for heart rate monitor](images/scan.png "")
 
 The filter is there for two reasons:
 
@@ -55,7 +55,7 @@ The filter is there for two reasons:
 
 It is also important to note that this scan can only be initiated by a user interaction.
 
-Once the user has selected a device and clicked connect we can connect to the device:
+Once the user has selected a device and clicked pair we can connect to the device:
 
 ```js
 const server = await device.gatt.connect();
@@ -97,7 +97,6 @@ The heart rate measurement characteristic in the code above is using the notify 
 
 This characteristic can only be read, because it does not make sense for you to be able to tell the heart rate monitor what your heart rate is. This means that there is no permission to write to this characteristic.
 
-
 ## Where do I find the UUID
 
 A UUID falls into one of two categories:
@@ -109,6 +108,11 @@ For the first, you can find a list of all of them on the Bluetooth SIG website. 
 
 ## Conclusion
 
-These are some of the basics of BLE and how communication works for Bluetooth devices. If you want to know more about it, you can take a look at the articles on the [Bluetooth SIG](https://www.bluetooth.com/) website, as well as the book [Getting Started with Bluetooth Low Energy](https://www.oreilly.com/library/view/getting-started-with/9781491900550/). 
+These are some of the basics of BLE and how communication works for Bluetooth devices. If you want to know more about it, you can take a look at the articles on the [Bluetooth SIG](https://www.bluetooth.com/) website, as well as the book [Getting Started with Bluetooth Low Energy](https://www.oreilly.com/library/view/getting-started-with/9781491900550/).
 
-If you are more interested in using the Web Bluetooth API, then keep an eye on my blog. I will be posting some examples soon.
+If you'd like to get started with Web Bluetooth, besides the resources I listed above, you can also check out some of my talks:
+
+- [A Web of Things](https://www.youtube.com/watch?v=GP0xo__mWdo)
+- [The Physical Web and Beyond](https://www.youtube.com/watch?v=VofwRvURf6s)
+ 
+The Web Bluetooth API is currently not on the standardisation path, and because of this it is not very well [supported](https://caniuse.com/#feat=web-bluetooth). It also has a number of security considerations you should keep in mind, if you are planning on trying it. There are a number of good articles that talk about the security of the API, [this one](https://medium.com/@jyasskin/the-web-bluetooth-security-model-666b4e7eed2) is a good place to start. Even though there are concerns and limitations, it is still a technology that provides us with a great opportunity. I look forward to seeing how this API grows and sharing my knowledge with all of you.
