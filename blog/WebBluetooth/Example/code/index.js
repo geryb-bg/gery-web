@@ -7,16 +7,16 @@ const connect = document.getElementById('connect');
 const deviceHeartbeat = document.getElementById('deviceHeartbeat');
 
 const primaryServiceUuid = '12345678-1234-5678-1234-56789abcdef0';
-const heartBeatCharUuid = '12345678-1234-5678-1234-56789abcdef1';
-const cmdCharUuid = '12345678-1234-5678-1234-56789abcdef3';
+const receiveCharUuid = '12345678-1234-5678-1234-56789abcdef1';
+const sendCharUuid = '12345678-1234-5678-1234-56789abcdef3';
 
-let device, cmdCharacteristic, heartCharacteristic;
+let device, sendCharacteristic, receiveCharacteristic;
 connectButton.onclick = async () => {
   device = await navigator.bluetooth.requestDevice({ filters: [{ services: [primaryServiceUuid] }] });
   const server = await device.gatt.connect();
   const service = await server.getPrimaryService(primaryServiceUuid);
-  heartCharacteristic = await service.getCharacteristic(heartBeatCharUuid);
-  cmdCharacteristic = await service.getCharacteristic(cmdCharUuid);
+  receiveCharacteristic = await service.getCharacteristic(receiveCharUuid);
+  sendCharacteristic = await service.getCharacteristic(sendCharUuid);
 
   device.ongattserverdisconnected = disconnect;
   listen();
@@ -26,12 +26,12 @@ connectButton.onclick = async () => {
   disconnectButton.style.display = 'initial';
 };
 
-const listen = (heartChar) => {
-  heartChar.addEventListener('characteristicvaluechanged', (evt) => {
+const listen = () => {
+  receiveCharacteristic.addEventListener('characteristicvaluechanged', (evt) => {
     const value = evt.target.value.getInt16(0, true);
     deviceHeartbeat.innerText = value;
   });
-  heartChar.startNotifications();
+  receiveCharacteristic.startNotifications();
 };
 
 const hexToRgb = (hex) => {
@@ -44,7 +44,7 @@ const hexToRgb = (hex) => {
 
 colourButton.onclick = async () => {
   const data = new Uint8Array([1, ...hexToRgb(colourPicker.value)]);
-  cmdCharacteristic.writeValue(data);
+  sendCharacteristic.writeValue(data);
 };
 
 disconnectButton.onclick = async () => {
@@ -53,6 +53,10 @@ disconnectButton.onclick = async () => {
 };
 
 const disconnect = () => {
+  device = null;
+  receiveCharacteristic = null;
+  sendCharacteristic = null;
+
   connected.style.display = 'none';
   connectButton.style.display = 'initial';
   disconnectButton.style.display = 'none';
