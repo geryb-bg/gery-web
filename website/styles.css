@@ -1,0 +1,113 @@
+#app {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #0c0032;
+  text-align: center;
+}
+#nav {
+  padding: 0.2em;
+  background-color: #282828;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #ffffff;
+  width: 5em;
+  display: inline-block;
+  background-color: #190061;
+  border: 1px solid #190061;
+  text-decoration: none;
+}
+
+#nav a.router-link-exact-active {
+  background-color: #3500d3;
+  border: 1px solid #ffffff;
+}
+
+a {
+  color: #240090;
+}
+
+h1 {
+  color: #3500d3;
+}
+
+#app {
+  height: 100%;
+}
+
+.page {
+  min-height: 100%;
+  margin-bottom: -27px;
+}
+.page:after {
+  content: '';
+  display: block;
+}
+#nav,
+.page:after {
+  height: 21px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Changa', sans-serif;
+}
+
+.content {
+  text-align: left;
+  max-width: 900px;
+  margin: auto;
+  padding: 0 10px;
+}
+.home .header-img {
+  width: 100%;
+}
+.me-img {
+  width: 8em;
+  min-width: 50px;
+  border-radius: 50%;
+  margin-left: 2em;
+  margin-top: -4.65em;
+}
+
+h3 {
+  margin: 25px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 0.3em;
+  padding: 1em;
+  margin-bottom: 0.5em;
+  width: 20em;
+  box-shadow: 1px 1px 1px #282828;
+}
+.talks li a {
+  font-weight: bold;
+}
+.talks li h4 {
+  margin: 0;
+}
+.talks li p {
+  margin: 0;
+  font-size: 0.7em;
+}
+h1,
+h2,
+h3,
+p {
+  padding-bottom: 15px;
+}
+.last {
+  padding-bottom: 30px;
+}

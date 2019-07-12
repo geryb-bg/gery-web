@@ -35,6 +35,7 @@ Let's create an `index.js` file and start by getting references to all of the el
 ```js
 const connectButton = document.getElementById('connectButton');
 const disconnectButton = document.getElementById('disconnectButton');
+
 const colourPicker = document.getElementById('colourPicker');
 const colourButton = document.getElementById('colourButton');
 
@@ -134,17 +135,20 @@ As long as the device is connected it will continue to send a heart beat, we jus
 
 ```js
 const listen = () => {
-  receiveCharacteristic.addEventListener('characteristicvaluechanged', (evt) => {
-    const value = evt.target.value.getInt16(0, true);
-    deviceHeartbeat.innerText = value;
-  });
+  receiveCharacteristic
+    .addEventListener('characteristicvaluechanged', 
+      (evt) => {
+        const value = evt.target.value.getInt16(0, true);
+        deviceHeartbeat.innerText = value;
+      });
+  
   receiveCharacteristic.startNotifications();
 };
 ```
 
-This method does two things, it adds an event listener for `characteristicvaluechanged`, so that every time the characteristic updates it's value we will update the text on our page. It also uses the `startNotifications()` which tells the device that it can start sending us data. The last thing we need is to call the listen method from within the `connectButton.onclick` method, that way as soon as we connect to the device we can start listening to it's heart beat.
+This method does two things, it adds an event listener for `characteristicvaluechanged`, so that every time the characteristic updates it's value we will update the text on our page. It also uses the `startNotifications()` method which tells the device that it can start sending us data. The last thing we need is to call the listen method from within the `connectButton.onclick` method, that way as soon as we connect to the device we can start listening to it's heart beat.
 
-That's all we need to send data to and receive data from the nRF52 dongle over bluetooth. Start up your app one last time to check that everything is working. If something has gone wrong you can checkout the [full solution](https://github.com/geryb-bg/gery-web/tree/master/blog/WebBluetooth/Example/code).
+That's all we need to be able to send and receive data to and from the nRF52 dongle over bluetooth. Start up your app one last time to check that everything is working. If something has gone wrong you can checkout the [full solution](https://github.com/geryb-bg/gery-web/tree/master/blog/WebBluetooth/Example/code).
 
 ## Conclusion
 
