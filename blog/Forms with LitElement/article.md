@@ -2,7 +2,9 @@
 
 My team and I have been working on a project using the [PWA Starter Kit](https://pwa-starter-kit.polymer-project.org/) since the beginning of this year. I've learned so much in this project, how to create performant web components, how to embrace Redux (instead of fighting it) and how to secure the whole application using Azure Active Directory, just to name a few. Although we did get stuck a number of times on a few different things (which I plan to write about in the future), nothing stumped me more than building a form with validation. I think this was because I was thinking along the lines of _"But it's just a form, we build forms on the web every other day"_. By the end of this task, I went to my team, and with a big smile on my face said _"I Reduxed the hell out of that form"_.
 
-In this post I'd like to share with you what I did to get our form to work the way we wanted it. The end goal is to be able to create or update an object named **Quest** which consists of one or more **Missions**. Our object structure will look something like this:
+In this post I'd like to share with you what I did to get our form to work the way we wanted it.
+
+The end goal is to be able to create or update an object named **Quest** which consists of one or more **Missions**. Our object structure will look something like this:
 
 ```
 Quest {
@@ -15,7 +17,7 @@ Mission {
 }
 ```
 
-# The First Mission
+# The first mission
 
 The first component will be an HTML form that creates a mission object for us, it will have a property to store errors and it will not allow you to submit the form if there are errors on the page. The code for this looks as follows:
 
@@ -121,7 +123,7 @@ formValueUpdated(e) {
 }
 ```
 
-## Adding Missions
+## Adding more missions
 
 What we need to do next is implement the `//save mission here` method. In order to do that we will first make a new component, this new component will have our list of missions and it will also contain our form component. The basic outline will look like this:
 
@@ -220,7 +222,7 @@ stateChanged(state) {
 }
 ```
 
-> Here we are accessing the missions directly from the state. In my project we use `reselect` as a middleware to create optimized selectors. To see some of the things we did to improve our performance and make our code more readable, checkout my colleague's article on [Wrangling Redux](https://mikerambl.es/article/wrangling-redux-reducer-size).
+> Here we are accessing the missions directly from the state. In my project we use `reselect`, which is a middleware for creating optimized selectors. To see some of the things we did to improve our performance and make our code less complex, checkout my colleague's article on [Wrangling Redux](https://mikerambl.es/article/wrangling-redux-reducer-size).
 
 The last thing left to do is to replace that comment with a call to our action and update the list of missions:
 
@@ -228,7 +230,7 @@ The last thing left to do is to replace that comment with a call to our action a
 store.dispatch(missionsUpdated([...this.missions, mission]));
 ```
 
-# Adding the Quest
+# Quest
 
 Our next component will be in charge of gathering information about the quest. In our example the quest only has one property, however, the code is written in such a way that this can be extended. Let's create a `QuestEditor` component:
 
@@ -306,7 +308,7 @@ export class QuestEditor extends connect(store)(LitElement) {
 customElements.define('quest-editor', QuestEditor);
 ```
 
-This component is very similar to the one we created for missions, the big difference is that this component does not have a save button. The reason for this is because we want to save the quest and missions at the same time (which we will do in another component in a moment). The `QuestEditor` component also has two new actions `errorsDetected` and `questUpdated`. We can implement them as follows:
+This component is very similar to the one we created for missions, the big difference is that this component does not have a save button. This is because we want to save the quest and missions at the same time (which we will do in another component in a moment). The `QuestEditor` component also has two new actions `errorsDetected` and `questUpdated`. We can implement them as follows:
 
 ```js
 export const ERRORS_DETECTED = 'ERRORS_DETECTED';
@@ -356,6 +358,8 @@ case ERRORS_DETECTED:
     errors: action.errors
   }
 ```
+
+## Putting it all together
 
 We have to combine what we have done in one "main" component, this component will be called `Quest` and will look as follows:
 
@@ -422,7 +426,9 @@ export class Quest extends connect(store)(LitElement) {
 customElements.define('my-quest', Quest);
 ```
 
-This component is in charge of saving the things we have filled in. So it needs to know about both the quest and the missions. However, you may have noticed that quest and missions are not in the properties of this component, this is because in this case we do not need to re-render when the component changes. This component also needs to make sure we have filled in all of the details correctly, this is where the `pageValid` method comes in. Lastly, if there are no errors, the component needs to save everything.
+The `Quest` component is in charge of saving the things we have filled in. It needs to know about both the quest and the missions. However, you may have noticed that quest and missions are not in the properties of this component, this is because we do not need to re-render when quest or missions change. We also needs to make sure we have filled in all of the details correctly, the `pageValid` method is doing that for us. Lastly, if there are no errors, we can save everything (`//save quest and missions here`).
+
+## Some cleaning up
 
 We are almost done, there are a few more small things we have to handle. Let's start by displaying the `missions` error in the `MissionsList` component. To do that we need to:
 
