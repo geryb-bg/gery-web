@@ -5,12 +5,14 @@ My team and I have been working on a project using the [PWA Starter Kit](https:/
 In this post I'd like to share with you what I did to get our form to work the way we wanted it. The end goal is to be able to create or update an object named **Quest** which consists of one or more **Missions**. Our object structure will look something like this:
 
 ```
---------------------                ----------------------
-| QUEST            |                | MISSION            |
---------------------                ----------------------
-| Goal      STRING |                | Name        STRING |
---------------------                | Description STRING |
-                                    ----------------------
+Quest {
+  goal: string
+}
+
+Mission {
+  name: string,
+  description: string
+}
 ```
 
 # The First Mission
