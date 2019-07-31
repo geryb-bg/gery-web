@@ -15,7 +15,7 @@ In this post I'd like to share with you what I did to get our form to work the w
 
 # The First Mission
 
-The first component will be an HTML form that stores the mission object inside a property, it will also have a property to store errors and it will not allow you to submit the form if there are errors on the page. The code for this looks as follows:
+The first component will be an HTML form that creates a mission object for us, it will have a property to store errors and it will not allow you to submit the form if there are errors on the page. The code for this looks as follows:
 
 ```js
 import { LitElement, html } from 'lit-element';
@@ -23,18 +23,11 @@ import { LitElement, html } from 'lit-element';
 export class MissionsForm extends LitElement {
   constructor() {
     super();
-
-    this.mission = {
-      name: '',
-      description: ''
-    };
-
     this.errors = [];
   }
 
   static get properties() {
     return {
-      mission: Object,
       errors: Array
     };
   }
@@ -52,13 +45,14 @@ export class MissionsForm extends LitElement {
       <form @submit="${(e) => this.submit(e)}">
         <div>
           <label>Name: </label>
-          <input class="${hasError('name')}" type="input" name="name" .value="${this.mission.name}" />
+          <input class="${hasError('name')}" type="input" name="name"/>
         </div>
         <div>
           <label>
             Description:
           </label>
-          <textarea class="${hasError('description')}" type="input" name="description" .value="${this.mission.description}"> </textarea>
+          <textarea class="${hasError('description')}" type="input" name="description">
+          </textarea>
         </div>
         <div>
           <button type="button" @click="${() => this.cancel()}">Cancel</button>
@@ -74,19 +68,13 @@ export class MissionsForm extends LitElement {
     this.errors = this.checkForErrors(form);
 
     if (!this.errors.length) {
-      this.mission = {
-        ...this.mission,
+      let mission = {
         name: form.name.value,
         description: form.description.value
       };
 
-      //save your mission
-      this.mission = {
-        name: '',
-        description: ''
-      };
+      //save your mission here
       form.reset();
-      alert('Mission Saved');
     }
   }
 
@@ -105,10 +93,6 @@ export class MissionsForm extends LitElement {
   }
 
   cancel() {
-    this.mission = {
-      name: '',
-      description: ''
-    };
     form.reset();
   }
 }
@@ -137,4 +121,110 @@ formValueUpdated(e) {
   }
   this.errors = [...errorList];
 }
+```
+
+## Adding Missions
+
+What we need to do next is implement the `//save your mission here` method. In order to do that we will first make a new component, this new component will have our list of missions and it will also contain our form component. The basic outline will look like this:
+
+```js
+import { LitElement, html } from 'lit-element';
+
+import './missions-form.component';
+
+export class MissionsList extends LitElement {
+  constructor() {
+    super();
+    this.missions = [];
+  }
+
+  static get properties() {
+    return {
+      missions: Array
+    };
+  }
+
+  render() {
+    return html`
+      <ul>
+        ${this.missions.map(
+          (m) =>
+            html`
+              <li><strong>${m.name}:</strong> ${m.description}</li>
+            `
+        )}
+      </ul>
+      <missions-form></missions-form>
+    `;
+  }
+}
+
+customElements.define('missions-list', MissionsList);
+```
+
+We are going to use Redux to update our list of missions whenever save is clicked in the form component. If you are using the PWA Starter Kit, then you already have all of the Redux plumbing set up for you. If not, you can follow [this tutorial](https://vaadin.com/tutorials/lit-element/state-management-with-redux) to help you set it up. The following is the first version of our reducer:
+
+```js
+import { MISSIONS_UPDATED } from "../actions/missions-updated.action";
+
+const INITIAL_STATE = {
+    missions: []
+};
+
+export const editor = (state = INITIAL_STATE, action) => {
+    switch (action.type) {
+        case MISSIONS_UPDATED:
+            return {
+                ...state,
+                missions: action.missions
+            }
+        default:
+            return state;
+    }
+}
+```
+
+This reducer imports an action, let's implement that action:
+
+```js
+export const MISSIONS_UPDATED = 'MISSIONS_UPDATED';
+
+export const missionsUpdated = (missions) => {
+  return {
+    type: MISSIONS_UPDATED,
+    missions
+  };
+};
+```
+
+Now, whenever save is clicked we will need to dispatch that action, but in order to be able to do this we need to connect both of our components to the redux store. This means that we will need to change our `MissionsList` component to look like this:
+
+```js
+export class MissionsList extends connect(store)(LitElement) {
+  //...
+}
+```
+
+And our `MissionsForm` component will look like this:
+
+```js
+export class MissionsForm extends connect(store)(LitElement) {
+  //...
+}
+```
+
+Both of these components need to implement the `stateChanged` method, like this:
+
+```js
+stateChanged(state) {
+  this.missions = state.missions;
+}
+```
+
+> Here we are accessing the missions directly from the state. In my project we use `reselect` as a middleware to create optimized selectors. This has given us quite a nice performance boost. To see some of the things we did to improve our performance and make our code more readable, checkout my colleague's article on [Wrangling Redux](https://mikerambl.es/article/wrangling-redux-reducer-size).
+
+The last thing left to do is to replace that comment with a call to our action and update the list of missions:
+
+```js
+store.dispatch(missionsUpdated([...this.missions, mission]));
 ```
