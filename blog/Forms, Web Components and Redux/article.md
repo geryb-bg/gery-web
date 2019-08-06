@@ -1,6 +1,6 @@
 # Forms, Web Components and Redux
 
-My team and I have been working on a project using the [PWA Starter Kit](https://pwa-starter-kit.polymer-project.org/) since the beginning of this year. I've learned so much in this project, how to create performant web components, how to embrace Redux (instead of fighting it) and how to secure the whole application using Azure Active Directory, just to name a few. Although we did get stuck a number of times on a few different things (which I plan to write about in the future), nothing stumped me more than building a form with validation. I think this was because I was thinking along the lines of _"But it's just a form, we build forms on the web every other day"_. By the end of this task, I went to my team, and with a big smile on my face said _"I Reduxed the hell out of that form"_.
+My team and I have been working on a project using the [PWA Starter Kit](https://pwa-starter-kit.polymer-project.org/) since the beginning of this year. I've learned so much on this project, how to create performant web components, how to embrace Redux (instead of fighting it) and how to secure the whole application using Azure Active Directory, just to name a few. Although we did get stuck a number of times on a few different things (which we plan to write about in the future), nothing stumped me more than building a form with validation. I think this was because I was thinking along the lines of _"But it's just a form, we build forms on the web every other day"_. By the end of this task, I went to my team, and with a big smile on my face said _"I Reduxed the hell out of that form"_.
 
 In this post I'd like to share with you what I did to get our form to work the way we wanted it.
 
@@ -55,7 +55,7 @@ export class MissionsForm extends LitElement {
           <label>
             Description:
           </label>
-          <textarea class="${hasError('description')}" type="input" name="description"></textarea>
+          <textarea class="${hasError('description')}" name="description"></textarea>
         </div>
         <div>
           <button type="submit">Save</button>
@@ -163,7 +163,7 @@ export class MissionsList extends LitElement {
 customElements.define('missions-list', MissionsList);
 ```
 
-We are going to use Redux to update our list of missions whenever save is clicked in the form component. If you are using the PWA Starter Kit, then you already have all of the Redux plumbing set up for you. If not, you can follow [this tutorial](https://vaadin.com/tutorials/lit-element/state-management-with-redux) to help you set it up. The following is the first version of our reducer:
+We are going to use Redux to update our list of missions whenever save is clicked in the form component. If you are using the PWA Starter Kit, then you already have all of the Redux plumbing set up for you. If you started from scratch, follow [this tutorial](https://vaadin.com/tutorials/lit-element/state-management-with-redux) to help you set it up. The following is the first version of our reducer:
 
 ```js
 import { MISSIONS_UPDATED } from "../actions/missions-updated.action";
@@ -222,7 +222,7 @@ stateChanged(state) {
 }
 ```
 
-> Here we are accessing the missions directly from the state. In my project we use `reselect`, which is a middleware for creating optimized selectors. To see some of the things we did to improve our performance and make our code less complex, checkout my colleague's article on [Wrangling Redux](https://mikerambl.es/article/wrangling-redux-reducer-size).
+> Here we are accessing the missions directly from the state. In my project we use `reselect`, which is a middleware for creating optimised selectors. To see some of the things we did to improve our performance and make our code less complex, checkout my colleague's article on [Wrangling Redux](https://mikerambl.es/article/wrangling-redux-reducer-size).
 
 The last thing left to do is to replace that comment with a call to our action and update the list of missions:
 
@@ -361,7 +361,7 @@ case ERRORS_DETECTED:
 
 ## Putting it all together
 
-We have to combine what we have done in one "main" component, this component will be called `Quest` and will look as follows:
+We have to combine what we have done in one "_main_" component, this component will be called `Quest` and will look as follows:
 
 ```js
 import { LitElement, html } from 'lit-element';
@@ -373,17 +373,6 @@ import './quest-editor.component';
 import './missions-list.component';
 
 export class Quest extends connect(store)(LitElement) {
-  constructor() {
-    super();
-    this.errors = [];
-  }
-
-  static get properties() {
-    return {
-      errors: Array
-    };
-  }
-
   render() {
     return html`
       <h1>Create Quest</h1>
@@ -426,7 +415,7 @@ export class Quest extends connect(store)(LitElement) {
 customElements.define('my-quest', Quest);
 ```
 
-The `Quest` component is in charge of saving the things we have filled in. It needs to know about both the quest and the missions. However, you may have noticed that quest and missions are not in the properties of this component, this is because we do not need to re-render when quest or missions change. We also needs to make sure we have filled in all of the details correctly, the `pageValid` method is doing that for us. Lastly, if there are no errors, we can save everything (`//save quest and missions here`).
+The `Quest` component is in charge of saving the things we have filled in. It needs to know about both the quest and the missions. However, you may have noticed that this component does not have any of its own properties, this is because we do not need to re-render it when quest, missions or errors change. We also need to make sure we have filled in all of the details correctly, the `pageValid` method is doing that for us. Lastly, if there are no errors, we can save everything (`//save quest and missions here`).
 
 ## Some cleaning up
 
