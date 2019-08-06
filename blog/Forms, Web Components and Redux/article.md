@@ -1,6 +1,6 @@
 # Forms, Web Components and Redux
 
-My team and I have been working on a project using the [PWA Starter Kit](https://pwa-starter-kit.polymer-project.org/) since the beginning of this year. I've learned so much on this project, how to create performant web components, how to embrace Redux (instead of fighting it) and how to secure the whole application using Azure Active Directory, just to name a few. Although we did get stuck a number of times on a few different things (which we plan to write about in the future), nothing stumped me more than building a form with validation. I think this was because I was thinking along the lines of _"But it's just a form, we build forms on the web every other day"_. By the end of this task, I went to my team, and with a big smile on my face said _"I Reduxed the hell out of that form"_.
+My team and I have been working on a project using the [PWA Starter Kit](https://pwa-starter-kit.polymer-project.org/) since the beginning of this year. I've learned so much on this project, how to create performant web components, how to embrace Redux (instead of fighting it) and how to secure the whole application using Azure Active Directory, just to name a few. Although we did get stuck a number of times on a few different things (which we plan to write about in the future), nothing stumped me more than building a form with validation. I think this was because I was thinking along the lines of _"But it's just a form, we build forms on the web every other day"_. By the end of this task, I went to my team with a big smile on my face and said _"I Reduxed the hell out of that form"_.
 
 In this post I'd like to share with you what I did to get our form to work the way we wanted it.
 
@@ -198,7 +198,7 @@ export const missionsUpdated = (missions) => {
 };
 ```
 
-Now, whenever save is clicked we will need to dispatch that action, but in order to be able to do this we need to connect both of our components to the redux store. This means that we will need to change our `MissionsList` component to connect it to the Redux store:
+Now, whenever save is clicked we will need to dispatch that action. This means that we will need to change our `MissionsList` component to connect it to the Redux store:
 
 ```js
 export class MissionsList extends connect(store)(LitElement) {
