@@ -98,7 +98,7 @@ export class MissionsForm extends LitElement {
 customElements.define('missions-form', MissionsForm);
 ```
 
-This works fine, because every time we trigger the submit, if there are any errors, we update the property which causes the page to re-render and show us those errors. However, it's not great that the only time the errors will disappear is if the user clicks submit again. We want them to know that the error is fixed as soon as they have fixed it. In order to do that we must make a change to the html:
+This works fine, because every time we trigger the submit, if there are any errors, we update the property which causes the page to re-render and show us those errors. However, it's not great that the only time the errors will disappear is if the user clicks submit again. We want them to know that the error is fixed as soon as they have fixed it. In order to do that we must listen to the change event on the form:
 
 ```html
 <form @submit="${(e) => this.submit(e)}" @change="${(e) => this.formValueUpdated(e)}">
@@ -106,7 +106,7 @@ This works fine, because every time we trigger the submit, if there are any erro
 </form>
 ```
 
-We are now also listening to the change event on the form, this way we can remove the errors as soon as they are fixed by implementing the method:
+We can now remove the errors as soon as they are fixed by implementing the method:
 
 ```js
 formValueUpdated(e) {
@@ -198,7 +198,7 @@ export const missionsUpdated = (missions) => {
 };
 ```
 
-Now, whenever save is clicked we will need to dispatch that action, but in order to be able to do this we need to connect both of our components to the redux store. This means that we will need to change our `MissionsList` component to look like this:
+Now, whenever save is clicked we will need to dispatch that action, but in order to be able to do this we need to connect both of our components to the redux store. This means that we will need to change our `MissionsList` component to connect it to the Redux store:
 
 ```js
 export class MissionsList extends connect(store)(LitElement) {
@@ -206,7 +206,7 @@ export class MissionsList extends connect(store)(LitElement) {
 }
 ```
 
-And our `MissionsForm` component will look like this:
+And our `MissionsForm` component will also need to be connected:
 
 ```js
 export class MissionsForm extends connect(store)(LitElement) {
@@ -214,7 +214,7 @@ export class MissionsForm extends connect(store)(LitElement) {
 }
 ```
 
-Both of these components need to implement the `stateChanged` method, like this:
+Both of these components need to implement the `stateChanged` method:
 
 ```js
 stateChanged(state) {
