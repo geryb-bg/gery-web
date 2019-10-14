@@ -1,0 +1,53 @@
+body {
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.button {
+  background-color: black;
+  border: none;
+  color: #ffc000;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+#connected,
+#disconnectButton {
+  display: none;
+}
+
+#connected {
+  padding: 20px;
+  text-align: left;
+  font-size: 24px;
+  border-top: 1px solid black;
+}
+
+#pinNumber {
+  font-size: 24px;
+  width: 50px;
+}
+
+.char {
+  padding: 30px 0;
+  border-bottom: 1px solid black;
+}
+
+.char > .button {
+  font-size: 16px;
+  padding: 5px 15px;
+}
+
+#colourPicker {
+  width: 115px;
+  margin-bottom: 10px;
+}
+
+#off {
+  text-align: center;
+}

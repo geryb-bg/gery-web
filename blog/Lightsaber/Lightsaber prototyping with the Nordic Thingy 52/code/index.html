@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Nordic Thingy:52</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet" />
+    <link rel="icon" href="favicon.ico" />
+  </head>
+  <body>
+    <h1>Lightsaber prototype</h1>
+    <input class="button" type="button" id="connectButton" value="Connect" />
+    <input class="button" type="button" id="disconnectButton" value="Disconnect" />
+
+    <div id="connected">
+      <div class="char">Battery status: <span id="batteryStatus"></span></div>
+      <div class="char" id="off">Turn on your light saber by pushing the button!</div>
+      <div id="control">
+        <div class="char">
+          Orientation:
+          <ul>
+            <li id="orientationX"></li>
+            <li id="orientationY"></li>
+            <li id="orientationZ"></li>
+          </ul>
+        </div>
+        <div class="char">
+          <input id="colourPicker" type="color" />
+          <br />
+          <input class="button" type="button" id="colourButton" value="Send Colour" />
+        </div>
+      </div>
+    </div>
+
+    <script src="index.js" type="module"></script>
+  </body>
+</html>
