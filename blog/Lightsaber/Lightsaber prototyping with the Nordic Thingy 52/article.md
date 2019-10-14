@@ -301,4 +301,6 @@ We've also added a check in there to make sure that our lightsaber doesn't conti
 
 ## Summary
 
-Wow, that was quite a lot of code. If you got lost anywhere along the way you can check out the complete code on [GitHub](). We now have, a rather strange, square lightsaber prototype. I will definitely be posting more about this, and so will the rest of my team. So keep an eye out and you will see the fully functioning
+Wow, that was quite a lot of code. If you got lost anywhere along the way you can check out the complete code on [GitHub](https://github.com/geryb-bg/gery-web/tree/master/blog/Lightsaber/Lightsaber%20prototyping%20with%20the%20Nordic%20Thingy%2052/code). We now have a lightsaber prototype. It has all of the things we require from our lightsaber, lights, sounds, dead Jedi switch. It just doesn't really look like a lightsaber, but that's because it's just a prototype, right?
+
+I will definitely be posting more about this, and so will the rest of my team. So keep an eye out for the fully functioning lightsaber soon. 
