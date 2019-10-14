@@ -10,9 +10,6 @@ const orientationZ = document.getElementById('orientationZ');
 const control = document.getElementById('control');
 const off = document.getElementById('off');
 
-// const TCS_UUID = 'ef680100-9b35-4933-9b10-52ffa9740042';
-// const TES_UUID = 'ef680200-9b35-4933-9b10-52ffa9740042';
-// const DFU_UUID = '0000fe59-0000-1000-8000-00805f9b34fb';
 const batteryServiceUuid = 'battery_service';
 const motionServiceUuid = 'ef680400-9b35-4933-9b10-52ffa9740042';
 const userInterfaceServiceUuid = 'ef680300-9b35-4933-9b10-52ffa9740042';
@@ -42,13 +39,13 @@ connectButton.onclick = async () => {
   speakerCharacteristic = await getCharacteristic(server, soundServiceUuid, speakerCharUuid);
 
   device.ongattserverdisconnected = disconnect;
-  listen();
 
   connected.style.display = 'block';
   connectButton.style.display = 'none';
   disconnectButton.style.display = 'initial';
 
   await setUpDevice();
+  listen();
 };
 
 const getCharacteristic = async (server, serviceUuid, characteristicUuid) => {
@@ -78,7 +75,6 @@ const getSampleSound = (sound) => {
 };
 
 let ledColour = new Uint8Array([1, 0, 0, 255]);
-
 let lightsaberOn = false;
 const toggleLed = async (toggle) => {
   if (toggle) {
