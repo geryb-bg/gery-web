@@ -84,12 +84,12 @@ ul {
   list-style-type: none;
   padding: 0;
 }
-li {
+.talks li {
   display: inline-block;
   margin: 0 0.3em;
   padding: 1em;
   margin-bottom: 0.5em;
-  width: 20em;
+  width: 16em;
   box-shadow: 1px 1px 1px #282828;
 }
 .talks li a {
@@ -102,6 +102,18 @@ li {
   margin: 0;
   font-size: 0.7em;
 }
+.posts li {
+  margin: 0 0.3em 1em;
+  box-shadow: 3px 3px 6px #282828;
+  text-align: center;
+}
+.posts li a {
+  display: block;
+  width: inherit;
+  padding: 1em;
+  text-decoration: none;
+  font-weight: bold;
+}
 h1,
 h2,
 h3,
@@ -110,4 +122,10 @@ p {
 }
 .last {
   padding-bottom: 30px;
+}
+
+@media (min-width: 460px) {
+  .talks li {
+    min-width: 25em;
+  }
 }

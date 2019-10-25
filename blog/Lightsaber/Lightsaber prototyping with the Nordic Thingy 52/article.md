@@ -1,11 +1,11 @@
 # Lightsaber prototyping with the Nordic Thingy:52
 
-We're building a lightsaber!!! I don't want to give too much away, but a few weeks ago we started with the 3D print... I decided that while I wait for all of the components to arrive, I would get started on a prototype. Keep an eye out on my blog and my team's [Twitter account](https://twitter.com/bbdatc) for more updates on the complete version.
+We're building a lightsaber!!! I don't want to give too much away, but a few weeks ago we started with the 3D print… I decided that while I wait for all of the components to arrive, I would get started on a prototype.
 
-Obviously, our lightsaber would have to be wireless, so I thought we could rely on Bluetooth. Since I have a Thingy:52 that I haven't played with yet, I thought it would be a great place to start for prototyping our lightsaber. It has the four things we need:
+Obviously, our lightsaber would have to be wireless, so I thought we could rely on Bluetooth. Since I have a [Nordic Thingy:52](https://www.nordicsemi.com/Software-and-Tools/Prototyping-platforms/Nordic-Thingy-52) that I haven't played with yet, I thought it would be a great place to start for prototyping our lightsaber. It has the four things we need:
 
 - Lights - because it's in the name
-- Sound - to make it more noticeable
+- Sound - to make it more cooler
 - Button - so it turns off when you drop it (also known as the dead Jedi switch)
 - Accelerometer - so we can detect movement
 
@@ -276,6 +276,8 @@ const listen = () => {
 };
 ```
 
+The calculation above is directly from the Nordic repo, I did some reading  on what [quaternion rotation](https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation) is, but I will not try to explain it.
+
 Now we can choose a different sample per movement and play them as the lightsaber moves around:
 
 ```js
@@ -303,4 +305,4 @@ We've also added a check in there to make sure that our lightsaber doesn't conti
 
 Wow, that was quite a lot of code. If you got lost anywhere along the way you can check out the complete code on [GitHub](https://github.com/geryb-bg/gery-web/tree/master/blog/Lightsaber/Lightsaber%20prototyping%20with%20the%20Nordic%20Thingy%2052/code). We now have a lightsaber prototype. It has all of the things we require from our lightsaber, lights, sounds, dead Jedi switch. It just doesn't really look like a lightsaber, but that's because it's just a prototype, right?
 
-I will definitely be posting more about this, and so will the rest of my team. So keep an eye out for the fully functioning lightsaber soon. 
+I will definitely be posting more about this, and so will the rest of my team. So keep an eye out on this blog and my team's Twitter account for more updates on the complete fully functioning lightsaber.
