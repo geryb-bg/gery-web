@@ -16,7 +16,7 @@ If you'd like to know a bit more about how Bluetooth and Web Bluetooth work, you
 - [BLE and GATT and other TLAs](https://medium.com/@gerybbg/ble-and-gatt-and-other-tlas-d6619cb684dd)
 - [Web Bluetooth by example](https://medium.com/@gerybbg/web-bluetooth-by-example-6d200fa9a3ed)
 
-In order to keep this post short, here are the links to the [HTML](https://github.com/geryb-bg/gery-web/blob/master/blog/Lightsaber/Lightsaber%20prototyping%20with%20the%20Nordic%20Thingy%2052/code/index.html) and [CSS](https://github.com/geryb-bg/gery-web/blob/master/blog/Lightsaber/Lightsaber%20prototyping%20with%20the%20Nordic%20Thingy%2052/code/styles.css) we'll be using. We will concentrate more on writing and understanding the JavaScript. We want to accomplish the following:
+In order to keep this post short, here are the links to the [HTML](https://github.com/geryb-bg/lightsaber/blob/master/thingy-poc/index.html) and [CSS](https://github.com/geryb-bg/lightsaber/blob/master/thingy-poc/styles.css) we'll be using. We will concentrate more on writing and understanding the JavaScript. We want to accomplish the following:
 
 1. Connect to the lightsaber and check it's battery status.
 2. When the button is pressed - turn on the led and play the turning on sound
@@ -303,6 +303,6 @@ We've also added a check in there to make sure that our lightsaber doesn't conti
 
 ## Summary
 
-Wow, that was quite a lot of code. If you got lost anywhere along the way you can check out the complete code on [GitHub](https://github.com/geryb-bg/gery-web/tree/master/blog/Lightsaber/Lightsaber%20prototyping%20with%20the%20Nordic%20Thingy%2052/code). We now have a lightsaber prototype. It has all of the things we require from our lightsaber, lights, sounds, dead Jedi switch. It just doesn't really look like a lightsaber, but that's because it's just a prototype, right?
+Wow, that was quite a lot of code. If you got lost anywhere along the way you can check out the complete code on [GitHub](https://github.com/geryb-bg/lightsaber/tree/master/thingy-poc). We now have a lightsaber prototype. It has all of the things we require from our lightsaber, lights, sounds, dead Jedi switch. It just doesn't really look like a lightsaber, but that's because it's just a prototype, right?
 
 I will definitely be posting more about this, and so will the rest of my team. So keep an eye out on this blog and my team's Twitter account for more updates on the complete fully functioning lightsaber.
