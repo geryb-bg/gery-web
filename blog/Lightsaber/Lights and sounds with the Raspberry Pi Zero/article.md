@@ -1,6 +1,6 @@
 # Lights and sounds with the Raspberry Pi Zero
 
-IoT projects can be tons of fun, but figuring out all the hardware stuff is not always easy. As I mentioned in my [previous post](https://medium.com/@gerybbg/lightsaber-prototyping-with-the-nordic-thingy-52-890d54493b86), my team and I are building a lightsaber. A lightsaber requires at least two things, lights and sounds. In this post I will tell you how to set up an RGB LED strip (WS2812b), a sound hat (WM8960) and a button to control them both, on the Pi Zero. I will talk about the mistakes I made, and what you can do to avoid them, as well as the libraries I ended up using.
+IoT projects can be tons of fun, but figuring out all the hardware is not always easy. As I mentioned in my [previous post](https://medium.com/@gerybbg/lightsaber-prototyping-with-the-nordic-thingy-52-890d54493b86), my team and I are building a lightsaber. A lightsaber requires at least two things, lights and sounds. In this post I will tell you how to set up an RGB LED strip (WS2812b), a sound hat (WM8960) and a button to control them both, on the Pi Zero. I will talk about the mistakes I made, and what you can do to avoid them, as well as the libraries I ended up using.
 
 My Raspberry Pi Zero is running Raspbian Buster Lite, and I followed [this tutorial](https://www.losant.com/blog/getting-started-with-the-raspberry-pi-zero-w-without-a-monitor) to set it up.
 
@@ -50,7 +50,6 @@ So... If you solder your wire to the correct end of the LED strip, it's actually
 
 import time
 from rpi_ws281x import PixelStrip, Color
-import sys
 
 # LED strip configuration:
 LED_COUNT = 45
@@ -95,7 +94,7 @@ The button should have been the easiest thing to connect. There are many librari
 - [gpiozero](https://gpiozero.readthedocs.io/en/stable/index.html)
 - [RPi.GPIO](https://pypi.org/project/RPi.GPIO/)
 
-I tried JavaScript first, hence the first two, but I eventually settled for the last one. See I was having this weird problem, and it took me a while to figure out that it was not the library's fault. Every time I ran the code for the button, the sound would stop working, on reboot, it would be fixed again. It took me hours to figure this out, but it has to do with the fact that the PWM pin on the Raspberry Pi Zero, is kind of a normal GPIO pin and there is software that makes it into a PWM pin. There are other pins like this on the Pi, and if you happen to connect your button to one of those, it breaks the sound. I'm not sure if this is documented anywhere, but the way I figured it out was via trial and error.
+I tried JavaScript first, hence the first two, but I eventually settled for the last one. I was having this weird problem, and it took me a while to figure out that it was not the library's fault. Every time I ran the code for the button, the sound would stop working, on reboot, it would be fixed again. It took me hours to figure this out, but it has to do with the fact that the PWM pin on the Raspberry Pi Zero, is kind of a normal GPIO pin and there is software that makes it into a PWM pin. There are other pins like this on the Pi, and if you happen to connect your button to one of those, it breaks the sound. I'm not sure if this is documented anywhere, but the way I figured it out was via trial and error.
 
 You install the library with pip using the command `pip install RPi.GPIO` and this is the code you can use to detect if the button (connected to GPIO pin 26) is pressed or not:
 
@@ -112,6 +111,8 @@ if GPIO.input(26):
 else:
     print("released")
 ```
+
+In this code we are setting up the board and the pin that we are using. We are specifying that the pin is an input pin and then checking whether the button is pressed or not.
 
 ## Summary
 
