@@ -1,13 +1,18 @@
-# Playing with XinaBox Part 2
+---
+title: Playing with XinaBox Part 2
+description: What's cooler than a fancy thermometer? Well, how about a fancy thermometer that is connected to the internet?
+published: false
+tags: IoT, Arduino, XinaBox, GCP
+canonical_url: https://medium.com/@gerybbg/playing-with-xinabox-part-2-77f5abdc409b
+cover_image: images/header.jpg
+---
 
-![header logo](images/header.jpg "")
-
-In [part one](https://medium.com/@gerybbg/playing-with-xinabox-part-1-cfb742b676e7) of this tutorial series we created a temperature sensor. Although this little thing that we built is pretty cool, we have pretty much built a fancy thermometer. What's cooler than a fancy thermometer? Well, how about a fancy thermometer that is connected to the internet?
+In [part one](https://dev.to/gerybbg/playing-with-xinabox-part-1-2182) of this tutorial series we created a temperature sensor. Although this little thing that we built is pretty cool, we have pretty much built a fancy thermometer. What's cooler than a fancy thermometer? Well, how about a fancy thermometer that is connected to the internet?
 
 > One thing to note, for part 2 you are not necessarily limited to having the XinaBox components. You can achieve the same thing with a [ESP32](https://www.espressif.com/en/products/hardware/esp32/overview), [BME680](https://www.bosch-sensortec.com/bst/products/all_products/bme680) and an [OLED Display](http://www.solomon-systech.com/en/product/display-ic/oled-driver-controller/ssd1306/).
 
 ### What you will need
-- The XinaBox [device](https://medium.com/@gerybbg/playing-with-xinabox-part-1-cfb742b676e7) we built in part 1
+- The XinaBox [device](https://dev.to/gerybbg/playing-with-xinabox-part-1-2182) we built in part 1
 - A [Google Cloud Platform](https://console.cloud.google.com) account
 - [Node.js](https://nodejs.org/en/) installed on your computer (_Optional if you would like to run the app that reads the data from GCP IoT Core_)
 

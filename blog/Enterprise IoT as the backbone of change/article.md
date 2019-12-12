@@ -1,8 +1,11 @@
-# Enterprise IoT as the backbone of change
-
-## The "I" in IoT
-
-![header logo](images/header.jpeg "")
+---
+title: Enterprise IoT as the backbone of change
+description: We’re moving into an Internet-of-everything age faster than we can turn a kettle on. As the people who create software, you may think this has less to do with us than the people creating the devices. But for me, the building of the actual devices is less important than the “I” in IoT.
+published: false
+tags: IoT
+canonical_url: https://medium.com/@gerybbg/enterprise-iot-as-the-backbone-of-change-151e6d8fd24c
+cover_image: images/header.jpeg
+---
 
 We’re moving into an Internet-of-everything age faster than we can turn a kettle on. As the people who create software, you may think this has less to do with us than the people creating the devices. But for me, the building of the actual devices is less important than the “I” in IoT.
 

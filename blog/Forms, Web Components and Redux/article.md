@@ -1,4 +1,10 @@
-# Forms, Web Components and Redux
+---
+title: Forms, Web Components and Redux
+description: I think this was because I was thinking along the lines of But it's just a form, we build forms on the web every other day. By the end of this task, I went to my team with a big smile on my face and said I Reduxed the hell out of that form.
+published: false
+tags: Redux, lit-html, JavaScript, Forms
+canonical_url: https://medium.com/@gerybbg/forms-web-components-and-redux-59e2ffd2fc79
+---
 
 My team and I have been working on a project using the [PWA Starter Kit](https://pwa-starter-kit.polymer-project.org/) since the beginning of this year. I've learned so much on this project, how to create performant web components, how to embrace Redux (instead of fighting it) and how to secure the whole application using Azure Active Directory, just to name a few. Although we did get stuck a number of times on a few different things (which we plan to write about in the future), nothing stumped me more than building a form with validation. I think this was because I was thinking along the lines of _"But it's just a form, we build forms on the web every other day"_. By the end of this task, I went to my team with a big smile on my face and said _"I Reduxed the hell out of that form"_.
 

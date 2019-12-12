@@ -1,8 +1,13 @@
-# USB: a web developer perspective
+---
+title: USB - a web developer perspective
+description: This blog post is the short (web developer) version of the USB standard, the parts I needed in order to hack some USB devices with JavaScript.
+published: false
+tags: USB, WebUSB, JavaScript, Web
+canonical_url: https://medium.com/@gerybbg/usb-a-web-developer-perspective-cbee13883c89
+cover_image: images/header.jpg
+---
 
-![header logo](images/header.jpg "")
-
-One of the reason I really like my job is because I get to work with the technologies that I love. Two of these technologies are JavaScript and IoT. Now, I know you might think I'm crazy when I say this next part, but one of my favorite pass times is trying to make these two technologies work together. Taking what would generally be considered a "dumb" device and making it smart by using JavaScript and the web. For this reason I was really excited when I heard about WebUSB.
+One of the reason I really like my job is because I get to work with the technologies that I love. Two of these technologies are JavaScript and IoT. Now, I know you might think I'm crazy when I say this next part, but one of my favourite pass times is trying to make these two technologies work together. Taking what would generally be considered a "dumb" device and making it smart by using JavaScript and the web. For this reason I was really excited when I heard about WebUSB.
 
 The WebUSB API allows us to access USB devices from the browser. There are a number of tutorials, articles and talks online which explain what the purpose of this new technology is and how to use it. The following list has some of the resources I have been using:
 

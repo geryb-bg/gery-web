@@ -1,6 +1,14 @@
-# Lights and sounds with the Raspberry Pi Zero
+---
+title: Lights and sounds with the Raspberry Pi Zero
+description: A lightsaber requires at least two things, lights and sounds. In this post I will tell you how to set up an RGB LED strip (WS2812b), a sound hat (WM8960) and a button to control them both, on the Pi Zero.
+published: false
+tags: Raspberry Pi, IoT
+canonical_url: https://medium.com/@gerybbg/lights-and-sounds-with-the-raspberry-pi-zero-d048f0c6983b
+---
 
-IoT projects can be tons of fun, but figuring out all the hardware is not always easy. As I mentioned in my [previous post](https://medium.com/@gerybbg/lightsaber-prototyping-with-the-nordic-thingy-52-890d54493b86), my team and I are building a lightsaber. A lightsaber requires at least two things, lights and sounds. In this post I will tell you how to set up an RGB LED strip (WS2812b), a sound hat (WM8960) and a button to control them both, on the Pi Zero. I will talk about the mistakes I made, and what you can do to avoid them, as well as the libraries I ended up using.
+//TODO update link
+
+IoT projects can be tons of fun, but figuring out all the hardware is not always easy. As I mentioned in my [previous post](//TODO), my team and I are building a lightsaber. A lightsaber requires at least two things, lights and sounds. In this post I will tell you how to set up an RGB LED strip (WS2812b), a sound hat (WM8960) and a button to control them both, on the Pi Zero. I will talk about the mistakes I made, and what you can do to avoid them, as well as the libraries I ended up using.
 
 My Raspberry Pi Zero is running Raspbian Buster Lite, and I followed [this tutorial](https://www.losant.com/blog/getting-started-with-the-raspberry-pi-zero-w-without-a-monitor) to set it up.
 
@@ -28,8 +36,6 @@ player.play('my-sound.wav', (err) => {
 I did not have any problems with it (until I connected the button, but more on that later).
 
 ## Lights
-
-![RGB LED strip](images/lights.jpg "")
 
 There are quite a lot of tutorials online about how to set up a WS2812b LED strip on your Raspberry Pi, some of them mention that it should be the exact same for the Pi Zero as well (it is). However, I had a few problems.
 

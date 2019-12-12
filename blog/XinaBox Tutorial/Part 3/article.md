@@ -1,15 +1,20 @@
-# Playing with XinaBox Part 3
+---
+title: Playing with XinaBox Part 3
+description: In this part of the tutorial series we are going to use a cloud function to subscribe to the PubSub topic, read the data and forward it onto another device which can turn a fan on and off based on the temperature.
+published: false
+tags: IoT, Arduino, XinaBox, GCP
+canonical_url: https://medium.com/@gerybbg/playing-with-xinabox-part-3-3c47d672a0a
+cover_image: images/header.png
+---
 
-![header logo](images/header.png "")
-
-Thanks to parts [one](https://medium.com/@gerybbg/playing-with-xinabox-part-1-cfb742b676e7) and [two](https://medium.com/@gerybbg/playing-with-xinabox-part-2-77f5abdc409b) of this tutorial series we now have a fancy thermometer that is connected to the internet and sending data to the cloud. This data is stored inside the PubSub topic we created.
+Thanks to parts [one](https://dev.to/gerybbg/playing-with-xinabox-part-1-2182) and [two](https://dev.to/gerybbg/playing-with-xinabox-part-2-1khk) of this tutorial series we now have a fancy thermometer that is connected to the internet and sending data to the cloud. This data is stored inside the PubSub topic we created.
 
 In this part of the tutorial series we are going to use a cloud function to subscribe to the PubSub topic, read the data and forward it onto another device which can turn a fan on and off based on the temperature. Let's get started.
 
 ### What you will need
 
-- The XinaBox [device](https://medium.com/@gerybbg/playing-with-xinabox-part-1-cfb742b676e7) we built in part 1
-- The [GCP project](https://medium.com/@gerybbg/playing-with-xinabox-part-2-77f5abdc409b) we created in part 2
+- The XinaBox [device](https://dev.to/gerybbg/playing-with-xinabox-part-1-2182) we built in part 1
+- The [GCP project](https://dev.to/gerybbg/playing-with-xinabox-part-2-1khk) we created in part 2
 - The [Google Cloud SDK](https://cloud.google.com/sdk/docs/downloads-interactive) for deploying the Cloud Function.
 - A second XinaBox device consisting of:
     - A core processing chip: XinaBox [CW02](https://wiki.xinabox.cc/CW02_-_Wi-Fi_%26_Bluetooth_Core)
@@ -18,7 +23,7 @@ In this part of the tutorial series we are going to use a cloud function to subs
     - A relay: XinaBox [OC03](https://wiki.xinabox.cc/OC03_-_Relay_Out)
     - Four [xBus](https://wiki.xinabox.cc/Connectors) connectors to put everything together
 - A USB powered fan
-    ![alt fan](images/fan.jpg "")
+    ![alt my usb powered fan](images/fan.jpg "")
 
 ### The new device
 Clip all of the chips together:
@@ -239,3 +244,4 @@ gcloud functions deploy relayCloudIot /
 ### Conclusion
 
 Once your function is deployed everything should work. If something is not working as expected you can take a look at the [complete code on GitHub](https://github.com/geryb-bg/gery-web/tree/master/blog/XinaBox%20Tutorial/Part%203/code) to make sure you did not miss anything. In the next part of this series we are going to talk about using Actions on Google to get information from our devices and send information to them using the Google Assistant.
+

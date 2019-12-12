@@ -1,6 +1,11 @@
-# Playing with XinaBox Part 1
-
-![header logo](images/header.jpg "")
+---
+title: Playing with XinaBox Part 1
+description: With IoT becoming such a large part of our lives, I have often come across developers who want to get started but have no idea how.
+published: false
+tags: IoT, Arduino, XinaBox
+canonical_url: https://medium.com/@gerybbg/playing-with-xinabox-part-1-cfb742b676e7
+cover_image: images/header.jpg
+---
 
 With IoT becoming such a large part of our lives, I have often come across developers who want to get started but have no idea how. Why is that? Well, it is probably related to one of my favorite programmer jokes:
 

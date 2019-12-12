@@ -1,6 +1,10 @@
-# Restify, lit-html and Azure Pipelines
-
-![header logo](images/header.jpg "")
+---
+title: Restify, lit-html and Azure Pipelines
+description: Azure DevOps (formerly TFS) is a set of services created by Microsoft to make CI/CD easier for projects. We have been using it for the last seven months as source control. Recently, we had to deploy one of our old applications to an Azure Web App and we decided it was time to try some of the other features of Azure DevOps, the Pipelines. The pipeline we created ensures that every push to the master branch of our project goes straight to production (no pressure).
+published: false
+tags: JavaScript, Azure, Azure Pipelines, Web Apps
+canonical_url: https://medium.com/@gerybbg/restify-lit-html-and-azure-pipelines-a294e7bd2f7d
+---
 
 Azure DevOps (formerly TFS) is a set of services created by Microsoft to make CI/CD easier for projects. We have been using it for the last seven months as source control. Recently, we had to deploy one of our old applications to an Azure Web App and we decided it was time to try some of the other features of Azure DevOps, the Pipelines. The pipeline we created ensures that every push to the master branch of our project goes straight to production (no pressure).
 

@@ -1,10 +1,17 @@
-# Web Bluetooth by example
+---
+title: Web Bluetooth by example
+description: The Web Bluetooth API is quite a powerful feature of the web. It has a lot of potential and some really cool capabilities. However, getting started with it can be a little daunting. In this post I'd like to take you through building an example using the API with the nRF52 dongle.
+published: false
+tags: Bluetooth, Web Bluetooth, JavaScript, IoT
+canonical_url: https://medium.com/@gerybbg/web-bluetooth-by-example-6d200fa9a3ed
+cover_image: images/header.JPG
+---
 
-![header logo](images/header.png "")
+//TODO update links (3)
 
-The Web Bluetooth API is quite a powerful feature of the web. It has a lot of potential and some really cool capabilities. However, getting started with it can be a little daunting. In this post I'd like to take you through building an example using the API with the [nRF52 dongle](https://www.nordicsemi.com/?sc_itemid=%7BCDCCA013-FE4C-4655-B20C-1557AB6568C9%7D). Before starting with the code, if you would like to know more about the theory of the Web Bluetooth API, checkout my previous post: [_BLE and GATT and other TLAs_](https://medium.com/@gerybbg/ble-and-gatt-and-other-tlas-d6619cb684dd).
+The Web Bluetooth API is quite a powerful feature of the web. It has a lot of potential and some really cool capabilities. However, getting started with it can be a little daunting. In this post I'd like to take you through building an example using the API with the [nRF52 dongle](https://www.nordicsemi.com/?sc_itemid=%7BCDCCA013-FE4C-4655-B20C-1557AB6568C9%7D). Before starting with the code, if you would like to know more about the theory of the Web Bluetooth API, checkout my previous post: [_BLE and GATT and other TLAs_](//TODO).
 
-We are going to be following a very similar example to my [_WebUSB by example_](https://medium.com/@gerybbg/webusb-by-example-b4358e6a133c) post, with most of the code adapted from Lars Knudsen's [GitHub repo](https://github.com/larsgk/web-nrf52-dongle). We will be building a website, from scratch, that will connect to the Bluetooth device, send data to it to update the colour of the LED and receive data that will be displayed on the screen.
+We are going to be following a very similar example to my [_WebUSB by example_](//TODO) post, with most of the code adapted from Lars Knudsen's [GitHub repo](https://github.com/larsgk/web-nrf52-dongle). We will be building a website, from scratch, that will connect to the Bluetooth device, send data to it to update the colour of the LED and receive data that will be displayed on the screen.
 
 ## What you will need
 
@@ -15,7 +22,7 @@ We are going to be following a very similar example to my [_WebUSB by example_](
 
 ## The hardware
 
-We need to ensure that the nRF52 dongle is flashed with the correct software so that we can access it's Bluetooth capabilities. If you have already done this, by following the instructions in my [_WebUSB_ post](https://medium.com/@gerybbg/webusb-by-example-b4358e6a133c), then you can skip to the next section. If you have not, then please keep reading.
+We need to ensure that the nRF52 dongle is flashed with the correct software so that we can access it's Bluetooth capabilities. If you have already done this, by following the instructions in my [_WebUSB_ post](//TODO), then you can skip to the next section. If you have not, then please keep reading.
 
 We will be using [Zephyr](https://www.zephyrproject.org/), which is an operating system for small embedded devices. If you are interested in building the firmware and installing it yourself then you can take a look at the instructions on [Getting Started with Zephyr](https://docs.zephyrproject.org/latest/getting_started/index.html). Once you have it setup you will have to build the firmware and flash it onto the dongle by following [the instructions here](https://github.com/larsgk/web-nrf52-dongle/tree/master/dongle_firmware).
 
