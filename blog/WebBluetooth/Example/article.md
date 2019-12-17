@@ -7,11 +7,9 @@ canonical_url: https://medium.com/@gerybbg/web-bluetooth-by-example-6d200fa9a3ed
 cover_image: images/header.JPG
 ---
 
-//TODO update links (3)
+The Web Bluetooth API is quite a powerful feature of the web. It has a lot of potential and some really cool capabilities. However, getting started with it can be a little daunting. In this post I'd like to take you through building an example using the API with the [nRF52 dongle](https://www.nordicsemi.com/?sc_itemid=%7BCDCCA013-FE4C-4655-B20C-1557AB6568C9%7D). Before starting with the code, if you would like to know more about the theory of the Web Bluetooth API, checkout my previous post: [_BLE and GATT and other TLAs_](https://dev.to/gerybbg/ble-and-gatt-and-other-tlas-21f5).
 
-The Web Bluetooth API is quite a powerful feature of the web. It has a lot of potential and some really cool capabilities. However, getting started with it can be a little daunting. In this post I'd like to take you through building an example using the API with the [nRF52 dongle](https://www.nordicsemi.com/?sc_itemid=%7BCDCCA013-FE4C-4655-B20C-1557AB6568C9%7D). Before starting with the code, if you would like to know more about the theory of the Web Bluetooth API, checkout my previous post: [_BLE and GATT and other TLAs_](//TODO).
-
-We are going to be following a very similar example to my [_WebUSB by example_](//TODO) post, with most of the code adapted from Lars Knudsen's [GitHub repo](https://github.com/larsgk/web-nrf52-dongle). We will be building a website, from scratch, that will connect to the Bluetooth device, send data to it to update the colour of the LED and receive data that will be displayed on the screen.
+We are going to be following a very similar example to my [_WebUSB by example_](https://dev.to/gerybbg/webusb-by-example-5ac5) post, with most of the code adapted from Lars Knudsen's [GitHub repo](https://github.com/larsgk/web-nrf52-dongle). We will be building a website, from scratch, that will connect to the Bluetooth device, send data to it to update the colour of the LED and receive data that will be displayed on the screen.
 
 ## What you will need
 
@@ -22,7 +20,7 @@ We are going to be following a very similar example to my [_WebUSB by example_](
 
 ## The hardware
 
-We need to ensure that the nRF52 dongle is flashed with the correct software so that we can access it's Bluetooth capabilities. If you have already done this, by following the instructions in my [_WebUSB_ post](//TODO), then you can skip to the next section. If you have not, then please keep reading.
+We need to ensure that the nRF52 dongle is flashed with the correct software so that we can access its Bluetooth capabilities. If you have already done this, by following the instructions in my [_WebUSB_ post](https://dev.to/gerybbg/webusb-by-example-5ac5), then you can skip to the next section. If you have not, then please keep reading.
 
 We will be using [Zephyr](https://www.zephyrproject.org/), which is an operating system for small embedded devices. If you are interested in building the firmware and installing it yourself then you can take a look at the instructions on [Getting Started with Zephyr](https://docs.zephyrproject.org/latest/getting_started/index.html). Once you have it setup you will have to build the firmware and flash it onto the dongle by following [the instructions here](https://github.com/larsgk/web-nrf52-dongle/tree/master/dongle_firmware).
 
@@ -153,7 +151,7 @@ const listen = () => {
 };
 ```
 
-This method does two things, it adds an event listener for `characteristicvaluechanged`, so that every time the characteristic updates it's value we will update the text on our page. It also uses the `startNotifications()` method which tells the device that it can start sending us data. The last thing we need is to call the listen method from within the `connectButton.onclick` method, that way as soon as we connect to the device we can start listening to it's heart beat.
+This method does two things, it adds an event listener for `characteristicvaluechanged`, so that every time the characteristic updates its value we will update the text on our page. It also uses the `startNotifications()` method which tells the device that it can start sending us data. The last thing we need is to call the listen method from within the `connectButton.onclick` method, that way as soon as we connect to the device we can start listening to its heart beat.
 
 That's all we need to be able to send and receive data to and from the nRF52 dongle over bluetooth. Start up your app one last time to check that everything is working. If something has gone wrong you can checkout the [full solution](https://github.com/geryb-bg/gery-web/tree/master/blog/WebBluetooth/Example/code).
 

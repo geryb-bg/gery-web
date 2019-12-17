@@ -7,7 +7,7 @@ canonical_url: https://medium.com/@gerybbg/webusb-by-example-b4358e6a133c
 cover_image: images/header.png
 ---
 
-I have been researching the WebUSB API for a while now, how it works and what it can be used for. If you have not yet, take a look at the previous article I wrote on this topic: [USB: A web developer perspective](//TODO). Even after reading a lot about the API, I still struggled, until I tried it myself.
+I have been researching the WebUSB API for a while now, how it works and what it can be used for. If you have not yet, take a look at the previous article I wrote on this topic: [USB: A web developer perspective](https://dev.to/gerybbg/usb-a-web-developer-perspective-51in). Even after reading a lot about the API, I still struggled, until I tried it myself.
 
 I always find that the best way to learn is to write some code, so in this article we are going to do exactly that. Using an [nRF52 dongle](https://www.nordicsemi.com/?sc_itemid=%7BCDCCA013-FE4C-4655-B20C-1557AB6568C9%7D) and the code created by Lars Knudsen in [this GitHub repo](https://github.com/larsgk/web-nrf52-dongle) we will build a website that will connect to the device via USB. After we are connected we will add functionality to change the colours of the device's LED from our website. Lastly, we will add in some code to listen for messages sent from the device back to our computer and display those on the page.
 
