@@ -6,8 +6,6 @@ tags: JavaScript, Prototyping, IoT, Bluetooth
 canonical_url: https://medium.com/@gerybbg/lightsaber-prototyping-with-the-nordic-thingy-52-890d54493b86
 ---
 
-//TODO update links (2)
-
 We're building a lightsaber!!! I don't want to give too much away, but a few weeks ago we started with the 3D print… I decided that while I wait for all of the components to arrive, I would get started on a prototype.
 
 Obviously, our lightsaber would have to be wireless, so I thought we could rely on Bluetooth. Since I have a [Nordic Thingy:52](https://www.nordicsemi.com/Software-and-Tools/Prototyping-platforms/Nordic-Thingy-52) that I haven't played with yet, I thought it would be a great place to start for prototyping our lightsaber. It has the four things we need:
@@ -21,8 +19,8 @@ Connecting to the Thingy and using all of its Bluetooth attributes we can build 
 
 If you'd like to know a bit more about how Bluetooth and Web Bluetooth work, you should check out the other two posts I wrote about these technologies:
 
-- [BLE and GATT and other TLAs](//TODO)
-- [Web Bluetooth by example](//TODO)
+- [BLE and GATT and other TLAs](https://dev.to/gerybbg/ble-and-gatt-and-other-tlas-21f5)
+- [Web Bluetooth by example](https://dev.to/gerybbg/web-bluetooth-by-example-46dh)
 
 In order to keep this post short, here are the links to the [HTML](https://github.com/geryb-bg/lightsaber/blob/master/thingy-poc/index.html) and [CSS](https://github.com/geryb-bg/lightsaber/blob/master/thingy-poc/styles.css) we'll be using. We will concentrate more on writing and understanding the JavaScript. We want to accomplish the following:
 
